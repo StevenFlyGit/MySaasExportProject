@@ -1,14 +1,11 @@
-<%--
-  User: wpf
-  Date: 2020/11/1
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=utf-8"%>
 <html>
 <head>
-    <title>Title</title>
 </head>
+<script type="text/javascript">
+    //javascript页面跳转
+     window.location.href = "login.do";
+</script>
 <body>
-wpf欢迎你 <br/>
-<a href="${pageContext.request.contextPath}/company/surf">查询公司</a>
 </body>
 </html>
