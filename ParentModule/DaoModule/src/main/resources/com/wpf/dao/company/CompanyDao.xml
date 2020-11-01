@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 映射文件的命名空间必须是所对应接口的路径 -->
+<mapper namespace="com.wpf.dao.company.CompanyDao">
+
+
+    <resultMap id="company" type="com.wpf.domain.company.Company">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="expirationDate" column="expiration_date"/>
+        <result property="address" column="address"/>
+        <result property="licenseId" column="license_id"/>
+        <result property="representative" column="representative"/>
+        <result property="phone" column="phone"/>
+        <result property="companySize" column="company_size"/>
+        <result property="industry" column="industry"/>
+        <result property="remarks" column="remarks"/>
+        <result property="balance" column="balance"/>
+        <result property="city" column="city"/>
+
+    </resultMap>
+
+    <!--List<Company> queryAllCompanies();-->
+    <select id="queryAllCompanies" resultMap="company">
+        select * from ss_company
+    </select>
+
+</mapper>
