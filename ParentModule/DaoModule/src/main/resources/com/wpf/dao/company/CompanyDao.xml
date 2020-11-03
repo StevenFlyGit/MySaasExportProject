@@ -19,7 +19,6 @@
         <result property="remarks" column="remarks"/>
         <result property="balance" column="balance"/>
         <result property="city" column="city"/>
-
     </resultMap>
 
     <!--List<Company> queryAllCompanies();-->
@@ -27,4 +26,50 @@
         select * from ss_company
     </select>
 
+    <!--Company queryOneCompanyById(String companyId);-->
+    <select id="queryOneCompanyById" resultMap="company">
+        select * from ss_company where id = #{companyId}
+    </select>
+
+    <!--抽取修改和添加方法中重用的部分-->
+    <sql id="editCompany">
+
+    </sql>
+
+    <!--Integer insertOneCompany(Company company);-->
+    <insert id="insertOneCompany">
+        insert into ss_company values(
+            #{id},
+            #{name},
+            #{expirationDate},
+            #{address},
+            #{licenseId},
+            #{representative},
+            #{phone},
+            #{companySize},
+            #{industry},
+            #{remarks},
+            #{state},
+            #{balance},
+            #{city}
+         )
+    </insert>
+
+    <!--Integer updateOneCompanyById(Company company);-->
+    <update id="updateOneCompanyById">
+        update ss_company set
+            name=#{name},
+            expiration_date=#{expirationDate},
+            address=#{address},
+            license_id=#{licenseId},
+            representative=#{representative},
+            phone=#{phone},
+            company_size=#{companySize},
+            industry=#{industry},
+            remarks=#{remarks},
+            state=#{state},
+            balance=#{balance},
+            city=#{city}
+        where   id=#{id}
+    </update>
 </mapper>

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * 创建时间：2020/11/1
@@ -22,5 +23,24 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public List<Company> findAllCompanies() {
         return companyDao.queryAllCompanies();
+    }
+
+    @Override
+    public Company findOneCompanyById(String companyId) {
+        return companyDao.queryOneCompanyById(companyId);
+    }
+
+    @Override
+    public Boolean saveOneCompany(Company company) {
+        //通过工具类生成随机Id
+        company.setId(UUID.randomUUID().toString());
+        Integer row = companyDao.insertOneCompany(company);
+        return row > 0;
+    }
+
+    @Override
+    public Boolean changeOneCompany(Company company) {
+        Integer row = companyDao.updateOneCompanyById(company);
+        return row > 0;
     }
 }

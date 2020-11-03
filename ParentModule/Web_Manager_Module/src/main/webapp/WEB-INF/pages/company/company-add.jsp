@@ -37,65 +37,65 @@
         <!--订单信息-->
         <div class="panel panel-default">
             <div class="panel-heading">订单信息</div>
-            <form id="editForm" action="/company/edit.do" method="post">
-                <input type="hidden" name="id" value="${company.id}">
+            <form id="editForm" action="${ctx}/company/edit.do" method="post">
+                <%--<input type="hidden" name="id" value="${company.id}">--%>
                 <div class="row data-type" style="margin: 0px">
                     <div class="col-md-2 title">企业名称</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="企业名称" name="name" value="${company.name}">
+                        <input type="text" class="form-control" placeholder="企业名称" name="name" value="">
                     </div>
 
                     <div class="col-md-2 title">营业执照</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="营业执照" name="licenseId" value="${company.licenseId}">
+                        <input type="text" class="form-control" placeholder="营业执照" name="licenseId" value="">
                     </div>
 
                     <div class="col-md-2 title">所在城市</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="所在地" name="city" value="${company.city}">
+                        <input type="text" class="form-control" placeholder="所在地" name="city" value="">
                     </div>
 
                     <div class="col-md-2 title">企业地址</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="企业地址" name="address" value="${company.address}">
+                        <input type="text" class="form-control" placeholder="企业地址" name="address" value="">
                     </div>
 
                     <div class="col-md-2 title">法人代表</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="法人代表" name="representative" value="${company.representative}">
+                        <input type="text" class="form-control" placeholder="法人代表" name="representative" value="">
                     </div>
 
                     <div class="col-md-2 title">联系电话</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="联系电话" name="phone" value="${company.phone}">
+                        <input type="text" class="form-control" placeholder="联系电话" name="phone" value="">
                     </div>
 
                     <div class="col-md-2 title">公司规模</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="公司规模" name="companySize" value="${company.companySize}">
+                        <input type="text" class="form-control" placeholder="公司规模" name="companySize" value="">
                     </div>
 
                     <div class="col-md-2 title">所属行业</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="所属行业" name="industry" value="${company.industry}">
+                        <input type="text" class="form-control" placeholder="所属行业" name="industry" value="">
                     </div>
                     <div class="col-md-2 title">状态</div>
                     <div class="col-md-4 data">
                         <select class="form-control select2" name="state" style="width: 100%;">
-                            <option value="0" ${company.state==0 ? 'selected':''}>未审核</option>
-                            <option value="1" ${company.state==1 ? 'selected':''}>已审核</option>
+                            <option value="0" >未审核</option>
+                            <option value="1" >已审核</option>
                         </select>
-                        <input type="text" class="form-control" placeholder="状态" name="state" value="${company.state}">
+                        <input type="text" class="form-control" placeholder="状态" name="state" value="">
                     </div>
 
                     <div class="col-md-2 title">余额</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="余额" name="balance" value="${company.balance}">
+                        <input type="text" class="form-control" placeholder="余额" name="balance" value="">
                     </div>
 
                     <div class="col-md-2 title rowHeight2x">备注</div>
                     <div class="col-md-10 data rowHeight2x">
-                        <textarea class="form-control" rows="3" name="remarks">${company.remarks}</textarea>
+                        <textarea class="form-control" rows="3" name="remarks"></textarea>
                     </div>
                 </div>
             </form>
