@@ -20,11 +20,9 @@ public class CompanyController {
     @Autowired
     private CompanyService companyService;
 
-    @RequestMapping("/surf")
+    @RequestMapping("/list")
     private String surfController(Model model) {
-        model.addAttribute("list", companyService.findAllCompanies());
-        String s = null;
-        s.length();
+        model.addAttribute("CompanyList", companyService.findAllCompanies());
         return "company/company-list";
     }
 

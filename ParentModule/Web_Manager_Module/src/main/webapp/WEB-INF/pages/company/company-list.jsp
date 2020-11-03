@@ -14,7 +14,7 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
     <!-- 页面meta /-->
-    <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="${pageContext.request.contextPath}/plugins/jQuery/jquery-2.2.3.min.js"></script>
 </head>
 <script>
     function deleteById() {
@@ -92,7 +92,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${list}" var="item">
+                    <c:forEach items="${CompanyList}" var="item">
                     <tr>
                         <td><input name="ids" value="${item.id}" type="checkbox"></td>
                         <td>
