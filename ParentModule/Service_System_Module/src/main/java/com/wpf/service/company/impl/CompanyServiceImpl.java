@@ -43,4 +43,10 @@ public class CompanyServiceImpl implements CompanyService {
         Integer row = companyDao.updateOneCompanyById(company);
         return row > 0;
     }
+
+    @Override
+    public Boolean removeOneCompany(String id) {
+        Integer row = companyDao.deleteCompany(id);
+        return row > 0;
+    }
 }

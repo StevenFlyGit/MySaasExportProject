@@ -1,5 +1,6 @@
 package com.wpf.service.company;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.wpf.domain.company.Company;
 
 import java.util.List;
@@ -34,8 +35,15 @@ public interface CompanyService {
 
     /**
      * 修改一条company的数据
-     * @param company
-     * @return
+     * @param company 需要修改的值
+     * @return 是否成功
      */
     Boolean changeOneCompany(Company company);
+
+    /**
+     * 删除一条company的数据
+     * @param id 需要删除的company的Id值
+     * @return 是否成功
+     */
+    Boolean removeOneCompany(String id);
 }

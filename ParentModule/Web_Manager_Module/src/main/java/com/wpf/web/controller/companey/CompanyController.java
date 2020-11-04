@@ -66,8 +66,19 @@ public class CompanyController {
      * @return page
      */
     @RequestMapping("/toAdd")
-    public String jumpAddPage() {
+    public String jumpToAddPage() {
         return "company/company-add";
+    }
+
+    /**
+     * 执行删除操作的控制器方法
+     * @param id 需要删除的company的Id值
+     * @return
+     */
+    @RequestMapping("/delete")
+    public String removeCompany(String id) {
+        companyService.removeOneCompany(id);
+        return "redirect:/company/list";
     }
 
 }

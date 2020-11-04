@@ -7,7 +7,7 @@
 
 
     <resultMap id="company" type="com.wpf.domain.company.Company">
-        <result property="id" column="id"/>
+        <id property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="expirationDate" column="expiration_date"/>
         <result property="address" column="address"/>
@@ -72,4 +72,9 @@
             city=#{city}
         where   id=#{id}
     </update>
+
+    <!--Integer deleteCompany(String id);-->
+    <delete id="deleteCompany">
+        delete from ss_company where id = #{id}
+    </delete>
 </mapper>

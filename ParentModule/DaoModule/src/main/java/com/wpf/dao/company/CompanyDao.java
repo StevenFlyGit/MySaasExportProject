@@ -38,4 +38,6 @@ public interface CompanyDao {
      * @return 影响的行数
      */
     Integer updateOneCompanyById(Company company);
+
+    Integer deleteCompany(String id);
 }

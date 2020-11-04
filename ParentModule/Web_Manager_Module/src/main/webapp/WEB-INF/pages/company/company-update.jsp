@@ -37,7 +37,7 @@
         <!--订单信息-->
         <div class="panel panel-default">
             <div class="panel-heading">订单信息</div>
-            <form id="editForm" action="/company/edit.do" method="post">
+            <form name="editForm" id="editForm" action="/company/edit.do" method="post">
                 <input type="hidden" name="id" value="${company.id}">
                 <div class="row data-type" style="margin: 0px">
                     <div class="col-md-2 title">企业名称</div>
@@ -104,11 +104,22 @@
 
         <!--工具栏-->
         <div class="box-tools text-center">
-            <button type="button" onclick='document.getElementById("editForm").submit()' class="btn bg-maroon">保存</button>
+            <button type="button" onclick='updateSubmit()' class="btn bg-maroon">保存</button>
             <button type="button" class="btn bg-default" onclick="history.back(-1);">返回</button>
         </div>
         <!--工具栏/-->
-
+        <script>
+            //判断余额栏的输入情况，限制只能输入小数
+            function updateSubmit() {
+                let editForm = document.editForm;
+                let decimalReg = /^(([^0][0-9]+|0)\.([0-9]{1,2}))$/;
+                if (decimalReg.test(editForm.balance.value) || editForm.balance.value == '') {
+                    editForm.submit()
+                } else {
+                    alert("余额栏只能写小数，且只可保留一位或两位");
+                }
+            }
+        </script>
     </section>
     <!-- 正文区域 /-->
 

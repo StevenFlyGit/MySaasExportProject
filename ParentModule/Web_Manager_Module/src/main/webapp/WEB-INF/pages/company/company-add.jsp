@@ -85,12 +85,12 @@
                             <option value="0" >未审核</option>
                             <option value="1" >已审核</option>
                         </select>
-                        <input type="text" class="form-control" placeholder="状态" name="state" value="">
+                        <%--<input type="text" class="form-control" placeholder="状态" name="state" value="">--%>
                     </div>
 
                     <div class="col-md-2 title">余额</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="余额" name="balance" value="">
+                        <input type="text" class="form-control" placeholder="余额" id="balance" name="balance" value="">
                     </div>
 
                     <div class="col-md-2 title rowHeight2x">备注</div>
@@ -104,9 +104,21 @@
 
         <!--工具栏-->
         <div class="box-tools text-center">
-            <button type="button" onclick='document.getElementById("editForm").submit()' class="btn bg-maroon">保存</button>
+            <button type="button" onclick='saveSubmit()' class="btn bg-maroon">保存</button>
             <button type="button" class="btn bg-default" onclick="history.back(-1);">返回</button>
         </div>
+        <script>
+            //判断余额栏的输入情况，限制只能输入小数
+            function saveSubmit() {
+                let balanceInput = document.getElementById("balance");
+                let decimalReg = /^(([^0][0-9]+|0)\.([0-9]{1,2}))$/;
+                if (decimalReg.test(balanceInput.value) || balanceInput.value == '') {
+                    document.getElementById("editForm").submit()
+                } else {
+                    alert("余额栏只能写小数，且只可保留一位或两位");
+                }
+            }
+        </script>
         <!--工具栏/-->
 
     </section>
