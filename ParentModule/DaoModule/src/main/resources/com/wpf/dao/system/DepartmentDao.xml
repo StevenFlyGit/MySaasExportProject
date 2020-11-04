@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 映射文件的命名空间必须是所对应接口的路径 -->
+<mapper namespace="com.wpf.dao.system.DepartmentDao">
+
+    <resultMap id="department" type="com.wpf.domain.system.Department">
+        <id property="deptId" column="dept_id"></id>
+        <result property="deptName" column="dept_name"></result>
+        <result property="parentId" column="parent_id"></result>
+        <result property="state" column="state"></result>
+        <result property="companyId" column="company_id"></result>
+        <!--设置为延迟加载，即用到该属性时才到数据库中查询-->
+        <association property="parentDept" column="parent_id" fetchType="lazy"
+        javaType="com.wpf.domain.system.Department"
+        select="com.wpf.dao.system.DepartmentDao.queryDepartmentById"/>
+    </resultMap>
+
+    <!---->
+    <select id="queryDepartmentByCompanyId" resultMap="department">
+        select * from pe_dept where company_id = #{companyId}
+    </select>
+
+
+    <select id="queryDepartmentById" resultMap="department">
+        select * from pe_dept where dept_id = #{deptId}
+    </select>
+</mapper>

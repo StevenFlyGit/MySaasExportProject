@@ -86,14 +86,14 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${page.rows}" var="dept"  varStatus="st">
+                    <c:forEach items="${pageInfo.list}" var="dept"  varStatus="st">
                         <tr>
-                            <td><input type="checkbox" name="id" value="${dept.id }"/></td>
+                            <td><input type="checkbox" name="id" value="${dept.deptId }"/></td>
                             <td>${st.count }</td>
-                            <td>${dept.id }</td>
-                            <td>${dept.parent.deptName }</td>
-                            <td><a href="/system/dept/toUpdate.do?id=${dept.id }">${dept.deptName }</a></td>
-                            <th class="text-center"><button type="button" class="btn bg-olive btn-xs" onclick='location.href="/system/dept/toUpdate.do?id=${dept.id}"'>编辑</button></th>
+                            <td>${dept.deptId }</td>
+                            <td>${dept.parentDept.deptName == null ? '无上级' : dept.parentDept.deptName}</td>
+                            <td><a href="/system/dept/toUpdate.do?id=${dept.deptId }">${dept.deptName }</a></td>
+                            <th class="text-center"><button type="button" class="btn bg-olive btn-xs" onclick='location.href="/system/dept/toUpdate.do?id=${dept.deptId}"'>编辑</button></th>
                         </tr>
                     </c:forEach>
                     </tbody>
