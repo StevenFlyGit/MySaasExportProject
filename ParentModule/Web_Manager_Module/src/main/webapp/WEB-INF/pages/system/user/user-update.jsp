@@ -27,7 +27,7 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="/"><i class="fa fa-dashboard"></i> 首页</a></li>
-            <li><a href="/system/user/list.do">用户列表</a></li>
+            <li><a href="${ctx}/system/user/list.do">用户列表</a></li>
         </ol>
     </section>
     <!-- 内容头部 /-->
@@ -38,7 +38,7 @@
         <!--订单信息-->
         <div class="panel panel-default">
             <div class="panel-heading">用户信息</div>
-            <form id="editForm" action="/system/user/edit.do" method="post">
+            <form id="editForm" action="${ctx}/system/user/edit.do" method="post">
                 <input type="hidden" id="id" name="id" value="${user.id}">
                 <input type="hidden" id="deptName" name="deptName" value="${user.deptName}">
                 <div class="row data-type" style="margin: 0px">
@@ -49,10 +49,10 @@
 
                     <div class="col-md-2 title">所在部门</div>
                     <div class="col-md-4 data">
-                        <select class="form-control" onchange="document.getElementById('deptName').value=this.options[this.selectedIndex].text" name="deptId">
+                        <select class="form-control" onchange="" name="deptId">
                             <option value="">请选择</option>
-                            <c:forEach items="${deptList}" var="item">
-                                <option ${user.deptId == item.id ?'selected':''} value="${item.id}">${item.deptName}</option>
+                            <c:forEach items="${list}" var="item">
+                                <option ${user.deptId == item.deptId ?'selected':''} value="${item.deptId}">${item.deptName}</option>
                             </c:forEach>
                         </select>
                     </div>

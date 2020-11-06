@@ -39,5 +39,10 @@ public interface CompanyDao {
      */
     Integer updateOneCompanyById(Company company);
 
+    /**
+     * 删除一条Company表的数据
+     * @param id 需要删除的Id
+     * @return 影响的行数
+     */
     Integer deleteCompany(String id);
 }

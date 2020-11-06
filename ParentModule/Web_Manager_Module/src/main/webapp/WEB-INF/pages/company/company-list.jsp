@@ -106,7 +106,7 @@
                         <td>${item.state ==0?'未审核':'已审核'}</td>
                         <td class="text-center">${item.balance}</td>
                         <td class="text-center">
-                            <button type="button" class="btn bg-olive btn-xs" onclick='location.href="/company/toUpdate.do?id=${item.id}"'>编辑</button>
+                            <button type="button" class="btn bg-olive btn-xs" onclick='location.href="${ctx}/company/toUpdate.do?id=${item.id}"'>编辑</button>
                         </td>
                     </tr>
                     </c:forEach>

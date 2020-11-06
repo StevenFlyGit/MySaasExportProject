@@ -23,7 +23,7 @@
                 // location.href="/system/dept/delete.do?id="+id;
                 $.ajax({
                     url: "${ctx}/system/dept/delete.do",
-                    type: "get",
+                    type: "post",
                     data: {"id":id},
                     dataType: "json",
                     success: function (result) {
@@ -75,7 +75,7 @@
                 <div class="pull-left">
                     <div class="form-group form-inline">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-default" title="新建" onclick='location.href="/system/dept/toAdd.do"'><i class="fa fa-file-o"></i> 新建</button>
+                            <button type="button" class="btn btn-default" title="新建" onclick='location.href="${ctx}/system/dept/toAdd.do"'><i class="fa fa-file-o"></i> 新建</button>
                             <button type="button" class="btn btn-default" title="删除" onclick='deleteById()'><i class="fa fa-trash-o"></i> 删除</button>
                             <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
                         </div>

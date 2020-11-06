@@ -28,7 +28,7 @@ public interface DepartmentDao {
     Department queryDepartmentById(String deptId);
 
     /**
-     * 在pe_dept中根据companyId来查询数据，并出去某一条数据
+     * 在pe_dept中根据companyId来查询数据，并除去某一条数据
      * @param id 需要除去的department的Id值
      * @param companyId 查询用到的companyId到的值
      * @return 符合条件的department的list集合
