@@ -11,19 +11,62 @@
         <result property="parentId" column="parent_id"></result>
         <result property="state" column="state"></result>
         <result property="companyId" column="company_id"></result>
+        <result property="companyName" column="company_name"></result>
         <!--设置为延迟加载，即用到该属性时才到数据库中查询-->
         <association property="parentDept" column="parent_id" fetchType="lazy"
         javaType="com.wpf.domain.system.Department"
         select="com.wpf.dao.system.DepartmentDao.queryDepartmentById"/>
     </resultMap>
 
-    <!---->
+    <!--List<Department> queryDepartmentByCompanyId(String companyId);-->
     <select id="queryDepartmentByCompanyId" resultMap="department">
         select * from pe_dept where company_id = #{companyId}
     </select>
 
-
+    <!--Department queryDepartmentById(String deptId);-->
     <select id="queryDepartmentById" resultMap="department">
         select * from pe_dept where dept_id = #{deptId}
+    </select>
+
+    <!--queryDepartmentExceptIdByCompanyId-->
+    <select id="queryDepartmentExceptIdByCompanyId" resultMap="department">
+        select * from pe_dept where company_id = #{companyId} and dept_id != #{id}
+    </select>
+
+    <!--Integer insertOneDepartment(Department department);-->
+    <insert id="insertOneDepartment">
+        insert into pe_dept values (
+            #{deptId},
+            #{deptName},
+        <!--解决用户选择上级部门时可能未选择的问题，也可在service层通过java代码判断-->
+            <choose>
+                <when test="parentDept != null and parentDept.deptId != ''">#{parentDept.deptId}</when>
+                <otherwise>null</otherwise>
+            </choose>,
+            #{state},
+            #{companyId},
+            #{companyName}
+        )
+    </insert>
+
+    <!--Boolean updateOneDepartment(Department department);-->
+    <update id="updateOneDepartment">
+        update pe_dept set
+        dept_name=#{deptName},
+        parent_id=#{parentDept.deptId},
+        state=#{state},
+        company_id=#{companyId},
+        company_name=#{companyName}
+        where dept_id=#{deptId}
+    </update>
+
+    <!--Integer deleteOneDepartment(String deptId);-->
+    <delete id="deleteOneDepartment">
+        delete from pe_dept where dept_id=#{deptId}
+    </delete>
+
+    <!--List<Department> queryDepartmentByParentDeptId(String parentDeptId);-->
+    <select id="queryDepartmentByParentDeptId" resultType="com.wpf.domain.system.Department">
+        select * from pe_dept where parent_id=#{parentDeptId};
     </select>
 </mapper>

@@ -17,9 +17,27 @@
 <script>
     function deleteById() {
         var id = getCheckId()
+        alert(id);
         if(id) {
             if(confirm("你确认要删除此条记录吗？")) {
-                location.href="/system/dept/delete.do?id="+id;
+                // location.href="/system/dept/delete.do?id="+id;
+                $.ajax({
+                    url: "${ctx}/system/dept/delete.do",
+                    type: "get",
+                    data: {"id":id},
+                    dataType: "json",
+                    success: function (result) {
+                        if (result.message == 1) {
+                            window.location.reload();
+                        } else {
+                            alert("该部门有关联子部门，不能直接删除！");
+                        }
+                    },
+                    error: function (error) {
+                        alert("服务器忙。。。");
+                        console.log(error);
+                    }
+                });
             }
         }else{
             alert("请勾选待处理的记录，且每次只能勾选一个")
@@ -93,7 +111,7 @@
                             <td>${dept.deptId }</td>
                             <td>${dept.parentDept.deptName == null ? '无上级' : dept.parentDept.deptName}</td>
                             <td><a href="/system/dept/toUpdate.do?id=${dept.deptId }">${dept.deptName }</a></td>
-                            <th class="text-center"><button type="button" class="btn bg-olive btn-xs" onclick='location.href="/system/dept/toUpdate.do?id=${dept.deptId}"'>编辑</button></th>
+                            <th class="text-center"><button type="button" class="btn bg-olive btn-xs" onclick='location.href="${ctx}/system/dept/toUpdate.do?id=${dept.deptId}"'>编辑</button></th>
                         </tr>
                     </c:forEach>
                     </tbody>
