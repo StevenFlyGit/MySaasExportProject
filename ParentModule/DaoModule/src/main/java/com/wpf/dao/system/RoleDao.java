@@ -29,21 +29,21 @@ public interface RoleDao {
     Role queryRoleById(String deptId);
 
     /**
-     * 向pe_dept表中添加一条数据
+     * 向pe_role表中添加一条数据
      * @param role 需要添加的数据
      * @return 影响的行数
      */
     Integer insertOneRole(Role role);
 
     /**
-     * 修改pe_dept表中的一条数据
+     * 修改pe_role表中的一条数据
      * @param role 需要修改的数据
      * @return 影响的行数
      */
     Integer updateOneRole(Role role);
 
     /**
-     * 删除pe_dept表中的一条数据
+     * 删除pe_role表中的一条数据
      * @param deptId 需要删除的数据的Id值
      * @return 影响的行数
      */

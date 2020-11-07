@@ -29,21 +29,21 @@ public interface UserDao {
     User queryUserById(String deptId);
 
     /**
-     * 向pe_dept表中添加一条数据
+     * 向pe_user表中添加一条数据
      * @param user 需要添加的数据
      * @return 影响的行数
      */
     Integer insertOneUser(User user);
 
     /**
-     * 修改pe_dept表中的一条数据
+     * 修改pe_user表中的一条数据
      * @param user 需要修改的数据
      * @return 影响的行数
      */
     Integer updateOneUser(User user);
 
     /**
-     * 删除pe_dept表中的一条数据
+     * 删除pe_user表中的一条数据
      * @param deptId 需要删除的数据的Id值
      * @return 影响的行数
      */

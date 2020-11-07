@@ -1,7 +1,17 @@
 package com.wpf.service.system.ipml;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.wpf.dao.system.DepartmentDao;
+import com.wpf.dao.system.RoleDao;
+import com.wpf.dao.system.RoleDao;
+import com.wpf.domain.system.Role;
 import com.wpf.service.system.RoleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  * 创建时间：2020/11/6
@@ -12,5 +22,54 @@ import org.springframework.stereotype.Service;
 @Service
 public class RoleServiceImpl implements RoleService {
 
+    @Autowired
+    private RoleDao roleDao;
+
+    @Override
+    public PageInfo<Role> findRoleByPage(Integer pageSize, Integer currentPageNum, String companyId) {
+        //启用PageHelper插件
+        PageHelper.startPage(currentPageNum, pageSize);
+        //调用Dao层根据companyId来查询Role
+        List<Role> roleList = roleDao.queryRoleByCompanyId(companyId);
+        //将Role的数据封装到pageInfo对象中
+        PageInfo<Role> pageInfo = new PageInfo<>(roleList);
+        return pageInfo;
+    }
+
+    @Override
+    public Role findRoleById(String id) {
+        return roleDao.queryRoleById(id);
+    }
+
+    @Override
+    public Boolean addOneRole(Role role) {
+        role.setId(UUID.randomUUID().toString());
+
+        Integer row = roleDao.insertOneRole(role);
+        return row > 0;
+    }
+
+    @Override
+    public Boolean changeOneRole(Role role) {
+
+        Integer row = roleDao.updateOneRole(role);
+        return row > 0;
+    }
+
+    @Override
+    public Boolean removeOneRole(String roleId) {
+        //查找该角色是否被引用
+        //查询被用户引用的次数
+        //Integer userCount = roleDao.queryUserCountByRoleId(roleId);
+        //查询被权限引用的次数
+        //Integer moduleCount = roleDao.queryModuleCountByRoleId(roleId);
+        int count = 0;
+        if (count == 0) {
+            //没有子部门则可以删除
+            roleDao.deleteOneRole(roleId);
+            return true;
+        }
+        return false;
+    }
 
 }

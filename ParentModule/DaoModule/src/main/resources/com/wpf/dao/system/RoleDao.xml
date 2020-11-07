@@ -32,10 +32,11 @@
 
 
     <update id="updateOneRole">
-        pdate pe_role
-        set name = #{name},
-          remark = #{remark},
-          order_no = #{orderNo}
+        update pe_role
+        set
+            name = #{name},
+            remark = #{remark},
+            order_no = #{orderNo}
         where role_id = #{id}
     </update>
 

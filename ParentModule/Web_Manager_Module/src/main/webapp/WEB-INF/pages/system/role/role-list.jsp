@@ -68,7 +68,7 @@
                 <div class="pull-left">
                     <div class="form-group form-inline">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-default" title="新建" onclick='location.href="/system/role/toAdd.do"'><i class="fa fa-file-o"></i> 新建</button>
+                            <button type="button" class="btn btn-default" title="新建" onclick='location.href="${ctx}/system/role/toAdd.do"'><i class="fa fa-file-o"></i> 新建</button>
                             <button type="button" class="btn btn-default" title="删除" onclick='deleteById()'><i class="fa fa-trash-o"></i> 删除</button>
                             <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
                             <button type="button" class="btn btn-default" title="权限" onclick="findModuleByRoleId()"><i class="fa fa-users"></i> 权限</button>
@@ -98,14 +98,14 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${page.rows}" var="o" varStatus="status">
+                    <c:forEach items="${pageInfo.list}" var="o" varStatus="status">
                     <tr class="odd" onmouseover="this.className='highlight'" onmouseout="this.className='odd'" >
                         <td><input type="checkbox" name="id" value="${o.id}"/></td>
                         <td>${status.index+1}</td>
                         <td>${o.id}</td>
                         <td><a href="/system/role/toUpdate.do?id=${o.id}">${o.name}</a></td>
                         <td>${o.remark}</td>
-                        <th class="text-center"><button type="button" class="btn bg-olive btn-xs" onclick='location.href="/system/role/toUpdate.do?id=${o.id}"'>编辑</button></th>
+                        <th class="text-center"><button type="button" class="btn bg-olive btn-xs" onclick='location.href="${ctx}/system/role/toUpdate.do?id=${o.id}"'>编辑</button></th>
                     </tr>
                     </c:forEach>
                     </tbody>

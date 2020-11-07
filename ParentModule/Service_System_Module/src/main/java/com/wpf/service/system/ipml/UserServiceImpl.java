@@ -24,8 +24,6 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;
-    @Autowired
-    private DepartmentDao departmentDao;
 
     @Override
     public PageInfo<User> findUserByPage(Integer pageSize, Integer currentPageNum, String companyId) {
