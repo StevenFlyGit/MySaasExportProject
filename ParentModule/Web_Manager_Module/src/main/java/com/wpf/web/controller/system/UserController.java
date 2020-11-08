@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.wpf.dao.system.DepartmentDao;
 import com.wpf.domain.system.Department;
 import com.wpf.domain.system.User;
+import com.wpf.service.system.DepartmentService;
 import com.wpf.service.system.UserService;
 import com.wpf.web.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +32,18 @@ public class UserController extends BaseController {
     @Autowired
     private UserService userService;
     @Autowired
-    private DepartmentDao departmentDao;
+    private DepartmentService departmentService;
 
+    /**
+     * 分页查询User数据
+     * @param pageSize 一页显示的数据数量
+     * @param pageNum 当前页码数
+     * @return page
+     */
     @RequestMapping("/list")
     public String surfAllUser(Model model,
-                                    @RequestParam(defaultValue = "5") Integer pageSize,
-                                    @RequestParam(defaultValue = "1") Integer pageNum) {
+                              @RequestParam(defaultValue = "5") Integer pageSize,
+                              @RequestParam(defaultValue = "1") Integer pageNum) {
         //需要获取当用户所属的公司Id，目前先写死
         String companyId = getCompanyId();
         PageInfo<User> pageInfo = userService.findUserByPage(pageSize, pageNum, companyId);
@@ -55,23 +62,23 @@ public class UserController extends BaseController {
         String companyId = getCompanyId();
         //查询到需要回显的数据
         User user = userService.findUserById(id);
-        //查询到下拉列表的数据
-        List<Department> list = departmentDao.queryDepartmentByCompanyId(companyId);
+        //根据公司Id查找所有的部门，用于下拉框展示所在的选项
+        List<Department> list = departmentService.findDepartmentByCompanyId(companyId);
         model.addAttribute("user", user);
         model.addAttribute("list", list);
         return "system/user/user-update";
     }
 
     /**
-     *
-     * @return
+     * 查询下拉列表并跳转到添加页面
+     * @return page
      */
     @RequestMapping("/toAdd")
     public String jumpToAddPage(Model model) {
         //需要获取当用户所属的公司Id，目前先写死
         String companyId = getCompanyId();
-        //根据公司Id查找所有的部门，用于下拉框展示上级部门的选项
-        List<Department> list = departmentDao.queryDepartmentByCompanyId(companyId);
+        //根据公司Id查找所有的部门，用于下拉框展示所在的选项
+        List<Department> list = departmentService.findDepartmentByCompanyId(companyId);
         model.addAttribute("list", list);
         return "system/user/user-add";
     }

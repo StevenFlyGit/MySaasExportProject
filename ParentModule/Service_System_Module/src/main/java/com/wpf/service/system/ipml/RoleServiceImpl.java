@@ -3,12 +3,15 @@ package com.wpf.service.system.ipml;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.wpf.dao.system.DepartmentDao;
+import com.wpf.dao.system.ModuleDao;
 import com.wpf.dao.system.RoleDao;
 import com.wpf.dao.system.RoleDao;
+import com.wpf.domain.system.Module;
 import com.wpf.domain.system.Role;
 import com.wpf.service.system.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.UUID;
@@ -24,6 +27,8 @@ public class RoleServiceImpl implements RoleService {
 
     @Autowired
     private RoleDao roleDao;
+    @Autowired
+    private ModuleDao moduleDao;
 
     @Override
     public PageInfo<Role> findRoleByPage(Integer pageSize, Integer currentPageNum, String companyId) {
@@ -71,5 +76,21 @@ public class RoleServiceImpl implements RoleService {
         }
         return false;
     }
+
+    @Override
+    public void updateModulesByRoleId(String moduleIds, String roleId) {
+        //先将角色对应的权限全部删除
+        roleDao.deleteModulesOfRole(roleId);
+
+        if (!StringUtils.isEmpty(moduleIds)) {
+            String[] moduleStrings = moduleIds.split(",");
+            if (moduleStrings != null && moduleStrings.length > 0) {
+                for (int i = 0; i < moduleStrings.length; i++) {
+                    roleDao.insertOneModuleByRoleId(roleId, moduleStrings[i]);
+                }
+            }
+        }
+    }
+
 
 }

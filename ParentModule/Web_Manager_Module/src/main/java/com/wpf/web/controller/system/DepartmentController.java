@@ -34,7 +34,7 @@ public class DepartmentController extends BaseController {
                     @RequestParam(defaultValue = "1") Integer pageNum) {
         //需要获取当用户所属的公司Id，目前先写死
         String companyId = getCompanyId();
-        PageInfo<Department> pageInfo = departmentService.findDeptByPage(pageSize, pageNum, companyId);
+        PageInfo<Department> pageInfo = departmentService.findDepartmentByPage(pageSize, pageNum, companyId);
         model.addAttribute("pageInfo", pageInfo);
         return "system/dept/dept-list";
     }
@@ -49,9 +49,9 @@ public class DepartmentController extends BaseController {
         //需要获取当用户所属的公司Id，目前先写死
         String companyId = getCompanyId();
         //查询到需要回显的数据
-        Department department = departmentService.findDeptById(id);
+        Department department = departmentService.findDepartmentById(id);
         //查询到下拉列表的数据
-        List<Department> departmentList = departmentService.findDeptsExceptIdByCompanyId(id, companyId);
+        List<Department> departmentList = departmentService.findDepartmentsExceptIdByCompanyId(id, companyId);
         model.addAttribute("department", department);
         model.addAttribute("departmentList", departmentList);
         return "system/dept/dept-update";
@@ -66,7 +66,7 @@ public class DepartmentController extends BaseController {
         //需要获取当用户所属的公司Id，目前先写死
         String companyId = "1";
         //根据公司Id查找所有的部门，用于下拉框展示上级部门的选项
-        List<Department> departmentList = departmentService.findDeptByCompanyId(companyId);
+        List<Department> departmentList = departmentService.findDepartmentByCompanyId(companyId);
         model.addAttribute("departmentList", departmentList);
         return "system/dept/dept-add";
     }

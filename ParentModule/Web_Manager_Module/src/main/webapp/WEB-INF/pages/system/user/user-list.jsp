@@ -120,9 +120,9 @@
                                 <td>${item.email }</td>
                                 <td>${item.telephone }</td>
                                 <td>
-                                    <c:if test="${item.state == 0}">男</c:if>
-                                    <c:if test="${item.state == 1}">女</c:if>
-                                    <c:if test="${item.state != 1 and item.state != 0}">未选择</c:if>
+                                    <c:if test="${item.gender == 0}">男</c:if>
+                                    <c:if test="${item.gender == 1}">女</c:if>
+                                    <c:if test="${item.gender != 1 and item.gender != 0}">未选择</c:if>
                                 </td>
                                 <td>${item.station }</td>
                                 <td>

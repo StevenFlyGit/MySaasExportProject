@@ -22,33 +22,35 @@
         <section class="content">
             <div class="panel panel-default">
                 <div class="panel-heading">用户信息</div>
-                <form id="editForm" action="/system/module/edit.do" method="post">
-                    <input type="hidden" name="id" value="${module.id}">
-                    <input type="hidden" id="parentName" name="parentName" value="${module.parentName}">
+                <form id="editForm" action="${ctx}/system/module/edit.do" method="post">
+                    <%--<input type="hidden" name="id" value="">--%>
+                    <input type="hidden" id="parentName" name="parentName" value="">
                     <div class="row data-type" style="margin: 0px">
                         <div class="col-md-2 title">模块名</div>
                         <div class="col-md-4 data">
-                            <input type="text" class="form-control" placeholder="模块名" name="name" value="${module.name}">
+                            <input type="text" class="form-control" placeholder="模块名" name="name" value="">
                         </div>
 
                         <div class="col-md-2 title">上级模块</div>
                         <div class="col-md-4 data">
                             <select class="form-control" onchange="document.getElementById('parentName').value=this.options[this.selectedIndex].text" name="parentId">
-                                <option value="">请选择</option>
-                                <c:forEach items="${menus}" var="item">
-                                    <option ${module.parentId == item.id ?'selected':''} value="${item.id}">${item.name}</option>
+                                <option value="" >请选择</option>
+                                <c:forEach items="${list}" var="item">
+                                    <c:if test="${item.ctype != 2}">
+                                    <option value="${item.id}">${item.name}</option>
+                                    </c:if>
                                 </c:forEach>
                             </select>
                         </div>
 
                         <div class="col-md-2 title">权限标识</div>
                         <div class="col-md-4 data">
-                            <input type="text" class="form-control" placeholder="权限标识" name="cpermission" value="${module.cpermission}">
+                            <input type="text" class="form-control" placeholder="权限标识" name="cpermission" value="">
                         </div>
 
                         <div class="col-md-2 title">链接</div>
                         <div class="col-md-4 data">
-                            <input type="text" class="form-control" placeholder="链接" name="curl" value="${module.curl}">
+                            <input type="text" class="form-control" placeholder="链接" name="curl" value="">
                         </div>
 
 
@@ -56,37 +58,37 @@
                         <div class="col-md-2 title">类型</div>
                         <div class="col-md-4 data">
                             <div class="form-group form-inline">
-                                <div class="radio"><label><input type="radio" ${module.ctype==0?'checked':''} name="ctype" value="0">主菜单</label></div>
-                                <div class="radio"><label><input type="radio" ${module.ctype==1?'checked':''} name="ctype" value="1">二级菜单</label></div>
-                                <div class="radio"><label><input type="radio" ${module.ctype==2?'checked':''} name="ctype" value="2">按钮</label></div>
+                                <div class="radio"><label><input type="radio" name="ctype" value="0">主菜单</label></div>
+                                <div class="radio"><label><input type="radio" name="ctype" value="1">二级菜单</label></div>
+                                <div class="radio"><label><input type="radio" name="ctype" value="2">按钮</label></div>
                             </div>
                         </div>
 
                         <div class="col-md-2 title">状态</div>
                         <div class="col-md-4 data">
                             <div class="form-group form-inline">
-                                <div class="radio"><label><input type="radio" ${module.state==0?'checked':''} name="state" value="0">停用</label></div>
-                                <div class="radio"><label><input type="radio" ${module.state==1?'checked':''} name="state" value="1">启用</label></div>
+                                <div class="radio"><label><input type="radio" name="state" value="0">停用</label></div>
+                                <div class="radio"><label><input type="radio" name="state" value="1">启用</label></div>
                             </div>
                         </div>
 
                         <div class="col-md-2 title">从属</div>
                         <div class="col-md-4 data">
                             <div class="form-group form-inline">
-                            <div class="radio"><label><input type="radio" ${module.belong==0?'checked':''} name="belong" value="0">sass内部菜单</label></div>
-                            <div class="radio"><label><input type="radio" ${module.belong==1?'checked':''} name="belong" value="1">租用企业菜单</label></div>
+                            <div class="radio"><label><input type="radio" name="belong" value="0">sass内部菜单</label></div>
+                            <div class="radio"><label><input type="radio" name="belong" value="1">租用企业菜单</label></div>
                             </div>
                         </div>
 
                         <div class="col-md-2 title">排序号</div>
                         <div class="col-md-4 data">
-                            <input type="text" class="form-control" placeholder="排序号" name="orderNo" value="${module.orderNo}">
+                            <input type="text" class="form-control" placeholder="排序号" name="orderNo" value="">
                         </div>
 
 
                         <div class="col-md-2 title rowHeight2x">备注</div>
                         <div class="col-md-4 data rowHeight2x">
-                            <textarea class="form-control" rows="3" name="remark">${module.remark}</textarea>
+                            <textarea class="form-control" rows="3" name="remark"></textarea>
                         </div>
 
 

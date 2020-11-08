@@ -22,7 +22,7 @@
         <section class="content">
             <div class="panel panel-default">
                 <div class="panel-heading">用户信息</div>
-                <form id="editForm" action="/system/module/edit.do" method="post">
+                <form id="editForm" action="${ctx}/system/module/edit.do" method="post">
                     <input type="hidden" name="id" value="${module.id}">
                     <input type="hidden" id="parentName" name="parentName" value="${module.parentName}">
                     <div class="row data-type" style="margin: 0px">
@@ -34,9 +34,11 @@
                         <div class="col-md-2 title">上级模块</div>
                         <div class="col-md-4 data">
                             <select class="form-control" onchange="document.getElementById('parentName').value=this.options[this.selectedIndex].text" name="parentId">
-                                <option value="">请选择</option>
-                                <c:forEach items="${menus}" var="item">
+                                <option value="" >请选择</option>
+                                <c:forEach items="${list}" var="item">
+                                    <c:if test="${item.ctype != 2 and item.id != module.id}">
                                     <option ${module.parentId == item.id ?'selected':''} value="${item.id}">${item.name}</option>
+                                    </c:if>
                                 </c:forEach>
                             </select>
                         </div>

@@ -1,7 +1,10 @@
 package com.wpf.service.system;
 
 import com.github.pagehelper.PageInfo;
+import com.wpf.domain.system.Module;
 import com.wpf.domain.system.Role;
+
+import java.util.List;
 
 /**
  * 创建时间：2020/11/6
@@ -48,4 +51,10 @@ public interface RoleService {
      */
     Boolean removeOneRole(String roleId);
 
+    /**
+     * 更新角色对应的权限
+     * @param moduleIds 更新后选择的权限
+     * @param roleId 需要更新权限的角色Id值
+     */
+    void updateModulesByRoleId(String moduleIds, String roleId);
 }

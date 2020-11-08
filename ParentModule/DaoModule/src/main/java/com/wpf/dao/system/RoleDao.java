@@ -49,4 +49,18 @@ public interface RoleDao {
      */
     Integer deleteOneRole(String deptId);
 
+    /**
+     * 根据roleId来删除pe_role_module表中的对应数据
+     * @param roleId 需要删除权限的角色Id
+     * @return 影响的行数
+     */
+    Integer deleteModulesOfRole(String roleId);
+
+    /**
+     * 向pe_role_module表中插入一条数据
+     * @param roleId 插入的属性
+     * @param moduleId 插入的属性
+     * @return 影响的行数
+     */
+    Integer insertOneModuleByRoleId(String roleId, String moduleId);
 }

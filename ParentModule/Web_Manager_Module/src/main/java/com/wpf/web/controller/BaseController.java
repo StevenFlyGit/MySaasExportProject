@@ -16,13 +16,13 @@ import javax.servlet.http.HttpSession;
 public abstract class BaseController {
 
     @Autowired
-    HttpServletRequest request;
+    protected HttpServletRequest request;
 
     @Autowired
-    HttpServletResponse response;
+    protected HttpServletResponse response;
 
     @Autowired
-    HttpSession session;
+    protected HttpSession session;
 
     public String getCompanyId() {
         //目前先写死，完成登录功能后从用户数据中获取

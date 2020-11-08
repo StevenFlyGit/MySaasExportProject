@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 映射文件的命名空间必须是所对应接口的路径 -->
+<mapper namespace="com.wpf.dao.system.ModuleDao">
+
+    <resultMap id="module" type="com.wpf.domain.system.Module">
+        <id column="module_id" property="id" />
+        <result column="parent_id" property="parentId" />
+        <result column="parent_name" property="parentName" />
+        <result column="name" property="name" />
+        <result column="layer_num" property="layerNum" />
+        <result column="is_leaf" property="isLeaf" />
+        <result column="ico" property="ico" />
+        <result column="cpermission" property="cpermission" />
+        <result column="curl" property="curl" />
+        <result column="ctype" property="ctype" />
+        <result column="state" property="state" />
+        <result column="belong" property="belong" />
+        <result column="cwhich" property="cwhich" />
+        <result column="quote_num" property="quoteNum" />
+        <result column="remark" property="remark" />
+        <result column="order_no"  property="orderNo" />
+    </resultMap>
+
+    <select id="queryAllModules" resultMap="module">
+        select * from ss_module
+    </select>
+
+    <select id="queryModuleById" resultMap="module">
+        select * from ss_module where module_id = #{id}
+    </select>
+
+
+    <insert id="insertOneModule">
+        insert into ss_module (module_id, parent_id, parent_name, name, layer_num, is_leaf,
+        ico, cpermission, curl, ctype, state, belong, cwhich, quote_num,
+        remark, order_no)
+        values (#{id},
+        <!--解决添加或更新权限时，父级部门未选择的问题-->
+        <if test="parentId == null or parentId == '' ">
+            null, null,
+        </if>
+        <if test="parentId != null and parentId != '' ">
+            #{parentId}, #{parentName},
+        </if>
+        #{name}, #{layerNum}, #{isLeaf},
+        #{ico}, #{cpermission}, #{curl}, #{ctype}, #{state}, #{belong}, #{cwhich}, #{quoteNum},
+        #{remark}, #{orderNo})
+    </insert>
+
+
+    <update id="updateOneModule">
+        update ss_module
+        set
+        <!--解决添加或更新权限时，父级部门未选择的问题-->
+        <if test="parentId == null or parentId == '' ">
+            parent_id = null ,
+            parent_name = null ,
+        </if>
+        <if test="parentId != null and parentId != '' ">
+            parent_id = #{parentId},
+            parent_name = #{parentName},
+        </if>
+        name = #{name},
+        layer_num = #{layerNum},
+        is_leaf = #{isLeaf},
+        ico = #{ico},
+        cpermission = #{cpermission},
+        curl = #{curl},
+        ctype = #{ctype},
+        state = #{state},
+        belong = #{belong},
+        cwhich = #{cwhich},
+        quote_num = #{quoteNum},
+        remark = #{remark},
+        order_no = #{orderNo}
+        where module_id = #{id}
+    </update>
+
+
+    <delete id="deleteOneModule">
+        delete from ss_module where module_id = #{id}
+    </delete>
+
+
+    <select id="queryModuleByRoleId" resultMap="module">
+        select m.* from ss_module m , pe_role_module rm where
+        m.module_id = rm.module_id and rm.role_id = #{roleId}
+    </select>
+</mapper>

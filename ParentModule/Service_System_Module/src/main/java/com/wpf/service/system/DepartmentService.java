@@ -20,21 +20,21 @@ public interface DepartmentService {
      * @param companyId 需要查询的部门所属的公司Id
      * @return department的分页数据
      */
-    PageInfo<Department> findDeptByPage(Integer pageSize, Integer currentPageNum, String companyId);
+    PageInfo<Department> findDepartmentByPage(Integer pageSize, Integer currentPageNum, String companyId);
 
     /**
      * 根据一个department的Id值来获取对应数据
      * @param id 需要查询的department的Id值
      * @return 查找到的department对象
      */
-    Department findDeptById(String id);
+    Department findDepartmentById(String id);
 
     /**
      * 查询所有的department数据，除了其本身
      * @param id 除去的department对象
      * @return 符合条件的department的数据
      */
-    List<Department> findDeptsExceptIdByCompanyId(String id, String companyId);
+    List<Department> findDepartmentsExceptIdByCompanyId(String id, String companyId);
 
     /**
      * 添加一条department的数据记录
@@ -47,7 +47,7 @@ public interface DepartmentService {
      * 根据公司的id查找出所有的部门信息
      * @return 部门的List集合
      */
-    List<Department> findDeptByCompanyId(String companyId);
+    List<Department> findDepartmentByCompanyId(String companyId);
 
     /**
      * 修改一条department的数据记录

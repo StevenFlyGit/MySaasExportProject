@@ -24,7 +24,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     private DepartmentDao departmentDao;
 
     @Override
-    public PageInfo<Department> findDeptByPage(Integer pageSize, Integer currentPageNum, String companyId) {
+    public PageInfo<Department> findDepartmentByPage(Integer pageSize, Integer currentPageNum, String companyId) {
         //启用PageHelper插件
         PageHelper.startPage(currentPageNum, pageSize);
         //调用Dao层根据companyId来查询Department
@@ -35,12 +35,12 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Department findDeptById(String id) {
+    public Department findDepartmentById(String id) {
         return departmentDao.queryDepartmentById(id);
     }
 
     @Override
-    public List<Department> findDeptsExceptIdByCompanyId(String id, String companyId) {
+    public List<Department> findDepartmentsExceptIdByCompanyId(String id, String companyId) {
         return departmentDao.queryDepartmentExceptIdByCompanyId(id, companyId);
     }
 
@@ -56,7 +56,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public List<Department> findDeptByCompanyId(String companyId) {
+    public List<Department> findDepartmentByCompanyId(String companyId) {
         return departmentDao.queryDepartmentByCompanyId(companyId);
     }
 

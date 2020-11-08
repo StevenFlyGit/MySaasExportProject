@@ -40,11 +40,11 @@
             <div class="panel-heading">用户信息</div>
             <form id="editForm" action="${ctx}/system/user/edit.do" method="post">
                 <%--<input type="hidden" id="id" name="id" value="">--%>
-                <input type="hidden" id="deptName" name="deptName" value="${user.deptName}">
+                <input type="hidden" id="deptName" name="deptName" value="">
                 <div class="row data-type" style="margin: 0px">
                     <div class="col-md-2 title">用户名称</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="用户名称" name="userName" value="${user.userName}">
+                        <input type="text" class="form-control" placeholder="用户名称" name="userName" value="">
                     </div>
 
                     <div class="col-md-2 title">所在部门</div>
@@ -59,24 +59,24 @@
 
                     <div class="col-md-2 title">邮箱</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="邮箱" name="email" value="${user.email}">
+                        <input type="text" class="form-control" placeholder="邮箱" name="email" value="">
                     </div>
 
                     <div class="col-md-2 title">密码</div>
                     <div class="col-md-4 data">
-                        <input type="password" class="form-control" placeholder="密码" name="password" value="${user.password}">
+                        <input type="password" class="form-control" placeholder="密码" name="password" value="">
                     </div>
 
                     <div class="col-md-2 title">薪水</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="薪水" name="salary" value="${user.salary}">
+                        <input type="text" class="form-control" placeholder="薪水" name="salary" value="">
                     </div>
 
                     <div class="col-md-2 title">状态</div>
                     <div class="col-md-4 data">
                         <div class="form-group form-inline">
-                            <div class="radio"><label><input type="radio" ${user.state==0?'checked':''} name="state" value="0">停用</label></div>
-                            <div class="radio"><label><input type="radio" ${user.state==1?'checked':''} name="state" value="1">启用</label></div>
+                            <div class="radio"><label><input type="radio" name="state" value="0">停用</label></div>
+                            <div class="radio"><label><input type="radio" name="state" value="1">启用</label></div>
                         </div>
                     </div>
 
@@ -87,35 +87,35 @@
                                 <i class="fa fa-calendar"></i>
                             </div>
                             <input type="text" placeholder="入职时间"  name="joinDate" class="form-control pull-right"
-                                   value="${user.joinDate}" id="datepicker">
+                                   value="" id="datepicker">
                         </div>
                     </div>
 
                     <div class="col-md-2 title">等级</div>
                     <div class="col-md-4 data">
                         <div class="form-group form-inline">
-                            <div class="radio"><label><input type="radio" ${user.degree==1?'checked':''} name="degree" value="1">系统管理员</label></div>
-                            <div class="radio"><label><input type="radio" ${user.degree==2?'checked':''} name="degree" value="2">管理所有下属部门和人员</label></div>
-                            <div class="radio"><label><input type="radio" ${user.degree==3?'checked':''} name="degree" value="3">管理本部门</label></div>
-                            <div class="radio"><label><input type="radio" ${user.degree==4?'checked':''} name="degree" value="4">普通员工</label></div>
+                            <div class="radio"><label><input type="radio" name="degree" value="1">系统管理员</label></div>
+                            <div class="radio"><label><input type="radio" name="degree" value="2">管理所有下属部门和人员</label></div>
+                            <div class="radio"><label><input type="radio" name="degree" value="3">管理本部门</label></div>
+                            <div class="radio"><label><input type="radio" name="degree" value="4">普通员工</label></div>
                         </div>
                     </div>
 
                     <div class="col-md-2 title">性别</div>
                     <div class="col-md-4 data">
                         <div class="form-group form-inline">
-                            <div class="radio"><label><input type="radio" ${user.gender==0?'checked':''} name="gender" value="0">男</label></div>
-                            <div class="radio"><label><input type="radio" ${user.gender==1?'checked':''} name="gender" value="1">女</label></div>
+                            <div class="radio"><label><input type="radio" name="gender" value="0">男</label></div>
+                            <div class="radio"><label><input type="radio" name="gender" value="1">女</label></div>
                         </div>
                     </div>
 
                     <div class="col-md-2 title">岗位</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="岗位" name="station" value="${user.station}">
+                        <input type="text" class="form-control" placeholder="岗位" name="station" value="">
                     </div>
                     <div class="col-md-2 title">电话</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="电话" name="telephone" value="${user.telephone}">
+                        <input type="text" class="form-control" placeholder="电话" name="telephone" value="">
                     </div>
 
                     <div class="col-md-2 title">出生年月</div>
@@ -125,16 +125,16 @@
                                 <i class="fa fa-calendar"></i>
                             </div>
                             <input type="text" placeholder="出生年月" class="form-control pull-right" name="birthday"
-                                   value="${user.birthday}" id="datepicker1">
+                                   value="" id="datepicker1">
                         </div>
                     </div>
                     <div class="col-md-2 title">排序号</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="排序号" name="orderNo" value="${user.orderNo}">
+                        <input type="text" class="form-control" placeholder="排序号" name="orderNo" value="">
                     </div>
                     <div class="col-md-2 title">说明</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="说明" name="remark" value="${user.remark}">
+                        <input type="text" class="form-control" placeholder="说明" name="remark" value="">
                     </div>
                 </div>
             </form>

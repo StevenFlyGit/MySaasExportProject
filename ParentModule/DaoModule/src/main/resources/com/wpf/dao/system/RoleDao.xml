@@ -44,4 +44,16 @@
     <delete id="deleteOneRole">
         delete from pe_role where role_id = #{id}
     </delete>
+
+
+    <delete id="deleteModulesOfRole">
+        delete from pe_role_module where role_id = #{roleId}
+    </delete>
+
+    <!--insertOneModuleByRoleId(String moduleId, String roleId);-->
+    <insert id="insertOneModuleByRoleId">
+        insert into pe_role_module values (#{param1}, #{param2})
+    </insert>
+
+
 </mapper>

@@ -47,6 +47,8 @@ public class UserServiceImpl implements UserService {
         //解决用户选择部门时可能未选择的问题
         if ("".equals(user.getDeptId())) {
             user.setDeptId(null);
+            //同时将冗余字段-部门名称也设为null
+            user.setDeptName(null);
         }
         /*else {
             //通过部门Id来查找部门名称
@@ -62,6 +64,8 @@ public class UserServiceImpl implements UserService {
         //解决用户选择部门时可能未选择的问题
         if ("".equals(user.getDeptId())) {
             user.setDeptId(null);
+            //同时将冗余字段-部门名称也设为null
+            user.setDeptName(null);
         }
         Integer row = userDao.updateOneUser(user);
         return row > 0;
