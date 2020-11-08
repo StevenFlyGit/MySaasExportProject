@@ -9,7 +9,9 @@ import com.wpf.service.system.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 
@@ -94,6 +96,27 @@ public class UserServiceImpl implements UserService {
                 userDao.insertOneUserRole(userId, roleId);
             }
         }
+    }
+
+    @Override
+    public Map<String, Object> userLogin(String email, String password) {
+        //查找结果
+        List<User> userList = userDao.queryUserUserByEmailAndPassword(email, password);
+        //定义需要返回的结果集
+        Map<String, Object> map = new HashMap<>();
+        //判断结果
+        if (userList.size() == 1) {
+            map.put("result", true);
+            map.put("user", userList.get(0));
+        } else {
+            map.put("result", false);
+            if (userList.size() == 0) {
+                map.put("errorMsg", "用户名或密码错误");
+            } else {
+                map.put("errorMsg", "用户邮箱地址重复，请联系管理员");
+            }
+        }
+        return map;
     }
 
 

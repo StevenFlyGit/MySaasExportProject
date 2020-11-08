@@ -10,8 +10,8 @@
                 <img src="../img/user2-160x160.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-                <p> ${sessionScope.user.userName}</p>
-                <a href="#">${sessionScope.user.companyName}</a>
+                <p> ${sessionScope.LoginUser.userName}</p>
+                <a href="#">${sessionScope.LoginUser.companyName}</a>
             </div>
         </div>
 
@@ -150,12 +150,12 @@
              </a>
              <ul class="treeview-menu">
                  <li id="system-code">
-                     <a href="" onclick="setSidebarActive(this)"  target="iframe">
+                     <a href="/code" onclick="setSidebarActive(this)"  target="iframe">
                          <i class="fa fa-circle-o"></i>系统代码
                      </a>
                  </li>
                  <li id="base-factory">
-                     <a href="" onclick="setSidebarActive(this)"  target="iframe">
+                     <a href="/factory" onclick="setSidebarActive(this)"  target="iframe">
                          <i class="fa fa-circle-o"></i>厂家信息
                      </a>
                  </li>

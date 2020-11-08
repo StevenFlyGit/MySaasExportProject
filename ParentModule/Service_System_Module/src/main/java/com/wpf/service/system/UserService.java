@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.wpf.domain.system.User;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 创建时间：2020/11/6
@@ -56,4 +57,12 @@ public interface UserService {
      * @param roleIds 需要保存的角色Id数组
      */
     void saveRoles(String userId, String[] roleIds);
+
+    /**
+     * 登录业务
+     * @param email 用户输入的email
+     * @param password 用户输入的password
+     * @return 登录结果
+     */
+    Map<String, Object> userLogin(String email, String password);
 }

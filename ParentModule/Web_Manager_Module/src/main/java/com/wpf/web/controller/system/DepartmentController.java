@@ -64,7 +64,7 @@ public class DepartmentController extends BaseController {
     @RequestMapping("/toAdd")
     public String jumpToAddPage(Model model) {
         //需要获取当用户所属的公司Id，目前先写死
-        String companyId = "1";
+        String companyId = getCompanyId();
         //根据公司Id查找所有的部门，用于下拉框展示上级部门的选项
         List<Department> departmentList = departmentService.findDepartmentByCompanyId(companyId);
         model.addAttribute("departmentList", departmentList);

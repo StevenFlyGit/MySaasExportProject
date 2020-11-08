@@ -1,5 +1,6 @@
 package com.wpf.web.controller;
 
+import com.wpf.domain.system.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -25,12 +26,14 @@ public abstract class BaseController {
     protected HttpSession session;
 
     public String getCompanyId() {
-        //目前先写死，完成登录功能后从用户数据中获取
-        return "1";
+        return getLoginUser().getCompanyId();
     }
 
     public String getCompanyName() {
-        //目前先写死，完成登录功能后从用户数据中获取
-        return "传智播客教育股份有限公司";
+        return getLoginUser().getCompanyName();
+    }
+
+    public User getLoginUser() {
+        return (User) session.getAttribute("LoginUser");
     }
 }
