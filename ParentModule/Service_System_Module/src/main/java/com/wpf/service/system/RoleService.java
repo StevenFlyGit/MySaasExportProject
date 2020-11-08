@@ -57,4 +57,18 @@ public interface RoleService {
      * @param roleId 需要更新权限的角色Id值
      */
     void updateModulesByRoleId(String moduleIds, String roleId);
+
+    /**
+     * 通过用户的Id值来查找用户对应的角色
+     * @param userId 用户的Id
+     * @return 角色集合
+     */
+    List<Role> findRolesByUserId(String userId);
+
+    /**
+     * 查询出某个公司的所有角色，以供用户选择
+     * @param companyId 查询的公司Id
+     * @return 所有角色列表
+     */
+    List<Role> findAllRolesByCompanyId(String companyId);
 }

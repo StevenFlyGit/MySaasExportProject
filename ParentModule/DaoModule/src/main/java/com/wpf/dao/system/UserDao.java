@@ -55,4 +55,19 @@ public interface UserDao {
      * @return 数量值
      */
     Integer queryRoleByUserId(String userId);
+
+    /**
+     * 根据userId来删除pe_role_user表中的数据
+     * @param userId 需要删除userId值
+     * @return 影响的行数
+     */
+    Integer deleteUserRoleByUserId(String userId);
+
+    /**
+     * 向pe_role_user表中插入一条数据
+     * @param userId 需要插入的数据
+     * @param roleId 需要插入的数据
+     * @return 影响的行数
+     */
+    Integer insertOneUserRole(String userId, String roleId);
 }

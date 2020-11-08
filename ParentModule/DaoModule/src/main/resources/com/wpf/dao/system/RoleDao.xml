@@ -55,5 +55,11 @@
         insert into pe_role_module values (#{param1}, #{param2})
     </insert>
 
+    <!--连表pe_role_user和pe_role来查询用户对应的角色-->
+    <select id="queryRoleByUserId" resultMap="role">
+        select r.* from pe_role_user ru, pe_role r where r.role_id = ru.role_id and ru.user_id = #{userId};
+    </select>
+
+
 
 </mapper>

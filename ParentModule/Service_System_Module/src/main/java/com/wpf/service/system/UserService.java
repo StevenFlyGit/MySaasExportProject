@@ -49,4 +49,11 @@ public interface UserService {
      * @return 成功与否
      */
     Boolean removeOneUser(String userId);
+
+    /**
+     * 删除用户原有的角色，保存现在选择的角色
+     * @param userId 操作角色的用户的Id值
+     * @param roleIds 需要保存的角色Id数组
+     */
+    void saveRoles(String userId, String[] roleIds);
 }

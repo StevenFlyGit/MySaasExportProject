@@ -1,10 +1,11 @@
 package com.wpf.web.controller.system;
 
 import com.github.pagehelper.PageInfo;
-import com.wpf.dao.system.DepartmentDao;
 import com.wpf.domain.system.Department;
+import com.wpf.domain.system.Role;
 import com.wpf.domain.system.User;
 import com.wpf.service.system.DepartmentService;
+import com.wpf.service.system.RoleService;
 import com.wpf.service.system.UserService;
 import com.wpf.web.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * 创建时间：2020/11/6
@@ -33,6 +33,8 @@ public class UserController extends BaseController {
     private UserService userService;
     @Autowired
     private DepartmentService departmentService;
+    @Autowired
+    private RoleService roleService;
 
     /**
      * 分页查询User数据
@@ -118,6 +120,44 @@ public class UserController extends BaseController {
             map.put("success", false);
         }
         return map;
+    }
+
+    /**
+     * 展现用户所拥有的角色
+     * @param id 需要展现权限的用户Id
+     * @return page
+     */
+    @RequestMapping("/roleList")
+    public String surfRoleOfUser(Model model, String id) {
+        //通过UserId来查找User
+        User user = userService.findUserById(id);
+        //查询出用户所拥有的角色
+        List<Role> selectedRoles = roleService.findRolesByUserId(id);
+        //将拥有的角色的Id转换为一个字符串
+        String roleIds = "";
+        for (Role role : selectedRoles) {
+            roleIds += role.getId() + ",";
+        }
+        
+        //查询出所有的角色列表
+        List<Role> roleList = roleService.findAllRolesByCompanyId(getCompanyId());
+        
+        model.addAttribute("roleList", roleList);
+        model.addAttribute("roleIds", roleIds);
+        model.addAttribute("user", user);
+        return "system/user/user-role";
+    }
+
+    /**
+     * 提交修改后的用户角色表单
+     * @param userId 当前提交的用户Id值
+     * @param roleIds 修改后选中的角色Id数组
+     * @return page
+     */
+    @RequestMapping("/changeRole")
+    public String changeRoleOfUser(String userId, String[] roleIds) {
+        userService.saveRoles(userId, roleIds);
+        return "redirect:/system/user/list";
     }
 
 }

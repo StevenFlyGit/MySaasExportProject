@@ -92,5 +92,15 @@ public class RoleServiceImpl implements RoleService {
         }
     }
 
+    @Override
+    public List<Role> findRolesByUserId(String userId) {
+        return roleDao.queryRoleByUserId(userId);
+    }
+
+    @Override
+    public List<Role> findAllRolesByCompanyId(String companyId) {
+        return roleDao.queryRoleByCompanyId(companyId);
+    }
+
 
 }

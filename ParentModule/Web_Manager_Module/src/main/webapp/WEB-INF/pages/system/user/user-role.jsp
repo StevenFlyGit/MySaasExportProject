@@ -18,7 +18,7 @@
 </head>
 <script>
     function formSubmit() {
-        document.icform.action="/system/user/changeRole.do";
+        document.icform.action="${ctx}/system/user/changeRole.do";
         document.icform.submit();
     }
 </script>
@@ -44,15 +44,15 @@
             </div>
             <div class="box-body">
                 <form name="icform" method="post" >
-                    <input type="hidden" name="userid" value="${user.id}"/>
-                    <input type="hidden" name="oldRoleIds" value="${userRoleStr}"/>
+                    <input type="hidden" name="userId" value="${user.id}"/>
+                    <input type="hidden" name="oldRoleIds" value="${roleIds}"/>
                     <div class="textbox" id="centerTextbox">
                             <div style="text-align:left">
-                                <c:set var="oldRoleIds" value=""/>
+                                <%--<c:set var="oldRoleIds" value=""/>--%>
                                 <c:forEach items="${roleList}" var="role" varStatus="vs">
                                      <span style="padding:3px;margin-right:30px;width: 160px;display: inline-block">
                                          <input type="checkbox" name="roleIds" value="${role.id}"
-                                                <c:if test="${fn:contains(userRoleStr,role.id)}">checked</c:if>
+                                                <c:if test="${fn:contains(roleIds,role.id)}">checked</c:if>
                                          />
                                          ${role.name}
                                      </span>

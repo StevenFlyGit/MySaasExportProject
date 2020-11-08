@@ -63,4 +63,11 @@ public interface RoleDao {
      * @return 影响的行数
      */
     Integer insertOneModuleByRoleId(String roleId, String moduleId);
+
+    /**
+     * 连表pe_role_user和pe_role来查询用户对应的角色
+     * @param userId
+     * @return
+     */
+    List<Role> queryRoleByUserId(String userId);
 }
