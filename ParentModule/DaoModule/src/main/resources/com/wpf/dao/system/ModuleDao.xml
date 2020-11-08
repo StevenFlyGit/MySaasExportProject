@@ -89,4 +89,24 @@
         select m.* from ss_module m , pe_role_module rm where
         m.module_id = rm.module_id and rm.role_id = #{roleId}
     </select>
+
+
+    <select id="queryModuleByBelong" resultMap="module">
+        select * from ss_module where belong = #{moduleBelong};
+    </select>
+
+    <!--
+    直接连表查询有可能会查询出重复的结果
+    可以使用distinct关键字或者子查询的方式来去除重复
+    -->
+    <select id="queryModuleByUserId" resultMap="module">
+        <!--子查询实现-->
+        select m.* from ss_module m where module_id in
+        (select module_id from pe_role_module rm, pe_role_user ru
+        where rm.role_id = ru.role_id and ru.user_id = #{userId})
+        <!--distinct关键字查询实现实现-->
+        <!--select distinct m.* from pe_role_user ru inner join pe_role_module rm
+        on ru.role_id = rm.role_id inner join ss_module m
+        on rm.module_id = m.module_id where ru.user_id = #{userId}-->
+    </select>
 </mapper>

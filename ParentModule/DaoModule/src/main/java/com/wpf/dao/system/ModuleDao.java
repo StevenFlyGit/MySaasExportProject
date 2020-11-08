@@ -51,7 +51,21 @@ public interface ModuleDao {
     /**
      * 连表查询-根据角色Id查询对应的权限
      * @param roleId 需要查询权限的角色Id值
-     * @return 查询到的结果
+     * @return 查询到的结果集合
      */
     List<Module> queryModuleByRoleId(String roleId);
+
+    /**
+     * 根据ss_module表中的belong字段来查询module
+     * @param moduleBelong belong字段的值
+     * @return 查询到的结果集合
+     */
+    List<Module> queryModuleByBelong(int moduleBelong);
+
+    /**
+     * 连表查询-连接表pe_role_user、pe_role_module、ss_module来查询用户对应的权限
+     * @param userId 需要查询的用户Id值
+     * @return 查询到的结果集合
+     */
+    List<Module> queryModuleByUserId(String userId);
 }

@@ -59,10 +59,16 @@ public interface ModuleService {
     List<Module> findAllModules();
 
     /**
+     *
      * 根据角色的Id值来查询其对应的权限
-     * @return 查询到的结果
+     * @param roleId 需要查询的角色Id
+     * @return 查询到的结果集合
      */
     List<Module> findModulesByRoleId(String roleId);
 
-
+    /** 查询某个用户的所有权限
+     * @param userId 需要查询的用户Id
+     * @return 查询到的所有权限集合
+     */
+    List<Module> findModulesByUserId(String userId);
 }

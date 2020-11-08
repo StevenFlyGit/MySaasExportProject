@@ -3,8 +3,10 @@ package com.wpf.service.system.ipml;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.wpf.dao.system.ModuleDao;
+import com.wpf.dao.system.UserDao;
 import com.wpf.domain.system.Module;
 import com.wpf.domain.system.Role;
+import com.wpf.domain.system.User;
 import com.wpf.service.system.ModuleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,8 @@ public class ModuleServiceImpl implements ModuleService {
 
     @Autowired
     private ModuleDao moduleDao;
+    @Autowired
+    private UserDao userDao;
 
     @Override
     public PageInfo<Module> findModuleByPage(Integer pageSize, Integer currentPageNum, String companyId) {
@@ -69,6 +73,24 @@ public class ModuleServiceImpl implements ModuleService {
     @Override
     public List<Module> findModulesByRoleId(String roleId) {
         return moduleDao.queryModuleByRoleId(roleId);
+    }
+
+    @Override
+    public List<Module> findModulesByUserId(String userId) {
+        //根据Id查用户
+        User user = userDao.queryUserById(userId);
+        int userDegree = user.getDegree();
+        //判断用户的身份
+        if (userDegree == 0) {
+            //Degree为0代表示saas管理员，仅可访问saas模块
+            return moduleDao.queryModuleByBelong(0);
+        } else if (userDegree == 1) {
+            //Degree为0代表示企业管理员，可访问除saas模块以外的全部模块
+            return moduleDao.queryModuleByBelong(1);
+        } else {
+            //Degree为0代表示企业其他用户，根据用户权限动态查询权限(同样不能范根saas模块)
+            return moduleDao.queryModuleByUserId(userId);
+        }
     }
 
 }

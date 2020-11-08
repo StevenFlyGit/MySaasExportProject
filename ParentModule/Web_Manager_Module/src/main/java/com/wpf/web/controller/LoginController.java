@@ -1,12 +1,15 @@
 package com.wpf.web.controller;
 
+import com.wpf.domain.system.Module;
 import com.wpf.domain.system.User;
+import com.wpf.service.system.ModuleService;
 import com.wpf.service.system.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,6 +22,8 @@ public class LoginController extends BaseController{
 
     @Autowired
     UserService userService;
+    @Autowired
+    ModuleService moduleService;
 
     /**
      * 用户登录校验：index.jsp -> main.jsp
@@ -34,7 +39,14 @@ public class LoginController extends BaseController{
         } else {
             Map<String, Object> loginResult = userService.userLogin(emailURL, password);
             if ((Boolean) loginResult.get("result")) {
-                session.setAttribute("LoginUser", loginResult.get("user"));
+                User user = (User) loginResult.get("user");
+                //将用户数据放入session域中
+                session.setAttribute("LoginUser", user);
+
+                //查找用户的权限集合，用于显示菜单列表
+                List<Module> moduleList = moduleService.findModulesByUserId(user.getId());
+                session.setAttribute("moduleList", moduleList);
+
                 return "home/main";
             } else {
                 request.setAttribute("errorMsg", loginResult.get("errorMsg"));
