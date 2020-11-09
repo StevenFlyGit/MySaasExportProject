@@ -61,8 +61,15 @@ public interface UserService {
     /**
      * 登录业务
      * @param email 用户输入的email
-     * @param password 用户输入的password
+     * @param passwordInput 用户输入的password
      * @return 登录结果
      */
-    Map<String, Object> userLogin(String email, String password);
+    Map<String, Object> userLogin(String email, String passwordInput);
+
+    /**
+     * 使用shiro权限框架时的登录业务，根据用户输入的邮箱来查找数据库中的数据
+     * @return 查找到的结果
+     */
+    List<User> findUserByEmail(String emailInput);
+
 }

@@ -8,6 +8,8 @@ import com.wpf.service.system.DepartmentService;
 import com.wpf.service.system.RoleService;
 import com.wpf.service.system.UserService;
 import com.wpf.web.controller.BaseController;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,9 +45,14 @@ public class UserController extends BaseController {
      * @return page
      */
     @RequestMapping("/list")
+    //@RequiresPermissions("用户管理") //通过注解的方式实现权限控制
     public String surfAllUser(Model model,
                               @RequestParam(defaultValue = "5") Integer pageSize,
                               @RequestParam(defaultValue = "1") Integer pageNum) {
+
+        //硬编码实现权限校验
+//        SecurityUtils.getSubject().checkPermission("用户管理");
+
         //需要获取当用户所属的公司Id，目前先写死
         String companyId = getCompanyId();
         PageInfo<User> pageInfo = userService.findUserByPage(pageSize, pageNum, companyId);

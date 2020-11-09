@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--配置shiro过滤器工厂-->
+    <!--shiro的中央管理器类：ShiroFilterFactoryBean-->
+    <bean class="org.apache.shiro.spring.web.ShiroFilterFactoryBean" id="shiroSecurityFilter">
+        <!--配置shiro的核心安全接口-->
+        <property name="securityManager" ref="securityManager"/>
+        <!--配置校验后需要登录时，需要跳转到的登录页面-->
+        <property name="loginUrl" value="/login.jsp"/>
+        <!--配置访问权限不足时跳转到的页面-->
+        <property name="unauthorizedUrl" value="/unauthorized.jsp"/>
+        <!--配置访问特定连接时需要执行的操作，可以使用通配符-->
+        <property name="filterChainDefinitions">
+            <value>
+                <!--anon表示对对应连接的资源放行-->
+                /index.jsp* = anon
+                /login.jsp* = anon
+                /login* = anon
+                /logout* = anon
+                /css/** = anon
+                /img/** = anon
+                /plugins/** = anon
+                /make/** = anon
+                <!--访问左边资源，需要右边的权限-->
+                <!--/system/user/list* = perms["用户管理"]-->
+                <!--suthc表示连接对应的资源需要认证后才能访问-->
+                /** = authc
+            </value>
+        </property>
+    </bean>
+
+    <!--配置上一步中核心安全接口对应的实现类，即shiro的安全管理器-->
+    <bean class="org.apache.shiro.web.mgt.DefaultWebSecurityManager" id="securityManager">
+        <!--注入自定义的realm，可以在该类编写自定义的认证和授权方法进行对应的逻辑业务操作-->
+        <property name="realm" ref="newRealm"/>
+    </bean>
+
+    <!--配置自定义的Realm类，需要继承shiro提供的AuthorizingRealm类-->
+    <bean class="com.wpf.web.shiro.SaasExportRealm" id="newRealm">
+        <!--注入凭证匹配器，shiro会按照凭证匹配值中指定的算法来校验密码，从而进行认证-->
+        <!--<property name="credentialsMatcher" ref="credentialsMatcher"/>-->
+        <!--配置自定义凭证匹配器，可以自定义算法来校验密码，例如可以采用加盐加密的方式校验。自定义配置的匹配值需继承SimpleCredentialsMatcher-->
+        <property name="credentialsMatcher">
+            <bean class="com.wpf.web.shiro.CustomCredentialsMatcher"/>
+        </property>
+    </bean>
+
+    <!--配置凭证匹配器，可以配置指定的算法-->
+    <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher" id="credentialsMatcher">
+        <property name="hashAlgorithmName" value="md5"/>
+        <!--
+        value的值有5个：md5，sha512，md2，sha1，sha256，sha384
+        这5个值分别对应继承HashedCredentialsMatcher类的5个类的类名中"CredentialsMatcher"之前的字母(首字母小写)
+        -->
+    </bean>
+
+
+    <!--开启shrio注解扫描，这里配置完成后才能在用注解配置用户权限-->
+    <bean class="org.apache.shiro.spring.LifecycleBeanPostProcessor" id="lifecycleBeanPostProcessor"/>
+    <!--depends-on 控制对象创建的顺序；在创建当前对象之前，先创建depends-on依赖的对象。-->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor"/>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+</beans>

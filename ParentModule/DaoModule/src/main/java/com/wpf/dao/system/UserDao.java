@@ -72,11 +72,9 @@ public interface UserDao {
     Integer insertOneUserRole(String userId, String roleId);
 
     /**
-     * 根据邮箱地址和密码查找相应用户
+     * 根据邮箱地址查找相应用户
      * @param email 邮箱地址
-     * @param password 密码
      * @return 查找到的结果集合
      */
-    List<User> queryUserUserByEmailAndPassword(String email, String password);
-
+    List<User> queryUserUserByEmail(String email);
 }

@@ -4,6 +4,8 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 
+	<!-- Spring ApplicationContext 配置文件的路径,可使用通配符,多个路径用,号分隔 此参数用于后
+	面的 Spring Context Loader -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath*:spring/applicationContext-*.xml</param-value>
@@ -22,6 +24,21 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>characterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!--配置shiro-->
+	<!--这里的filter-name要与spring中配置的bean的name名称相同-->
+	<filter>
+		<filter-name>shiroSecurityFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		<init-param>
+			<param-name>targetFilterLifecycle</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>shiroSecurityFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 

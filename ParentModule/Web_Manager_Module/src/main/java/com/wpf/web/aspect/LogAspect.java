@@ -3,6 +3,7 @@ package com.wpf.web.aspect;
 import com.wpf.domain.system.SysLog;
 import com.wpf.domain.system.User;
 import com.wpf.service.system.SysLogService;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -19,6 +20,7 @@ import java.util.Date;
  */
 @Component
 @Aspect //标注一个切面类
+@Slf4j //自动生成：private static final Logger log = LoggerFactory.getLogger(CompanyController.class);
 public class LogAspect {
 
     @Autowired
@@ -39,10 +41,11 @@ public class LogAspect {
      * @param pcj 需要执行的方法对象
      * @return 执行的结果
      */
-    @Around("execution(* com.wpf.web.controller..*.*(..))") //采用环绕通知来记录日志，因为只有这种方式能获取执行方法的信息
+    //@Around("execution(* com.wpf.web.controller..*.*(..))") //采用环绕通知来记录日志，因为只有这种方式能获取执行方法的信息
     public Object saveLog(ProceedingJoinPoint pcj) {
 
         try {
+
             //先执行方法
             Object result = pcj.proceed();
 
@@ -61,7 +64,7 @@ public class LogAspect {
             }
 
             //创建并封装日志对象，才有lomBook的方式
-            SysLog log = SysLog.builder()
+            SysLog controllerLog = SysLog.builder()
                     .companyId(companyId)
                     .companyName(companyName)
                     .time(new Date())
@@ -72,10 +75,34 @@ public class LogAspect {
                     .build();
 
             //调用SysLog业务来存储日志信息
-            sysLogService.saveLog(log);
+            sysLogService.saveLog(controllerLog);
 
             return result;
         } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            throw new RuntimeException(throwable);
+        }
+    }
+
+    //利用了Slf4j注解生成的日志类和log4j框架来记录日志
+    @Around("execution(* com.wpf.web.controller..*.*(..))")
+    public Object saveLogByLog4j(ProceedingJoinPoint pcj) {
+        try {
+            //调用日志类在方法执行前记录日志(利用了log4j框架和Slf4j注解)
+            log.info(pcj.getTarget().getClass().getName() + "类中的" + pcj.getSignature().getName()
+                    + "方法开始执行");
+
+            Object result = pcj.proceed();
+
+            //调用日志类在方法执行前记录日志(利用了log4j框架和Slf4j注解)
+            log.info(pcj.getTarget().getClass().getName() + "类中的" + pcj.getSignature().getName()
+                    + "方法执行结束");
+
+            return result;
+        } catch (Throwable throwable) {
+            //调用日志类在方法发生异常时记录日志(利用了log4j框架和Slf4j注解)
+            log.error(pcj.getTarget().getClass().getName() + "类中的" + pcj.getSignature().getName()
+                    + "方法执行时发生异常", throwable);
             throwable.printStackTrace();
             throw new RuntimeException(throwable);
         }

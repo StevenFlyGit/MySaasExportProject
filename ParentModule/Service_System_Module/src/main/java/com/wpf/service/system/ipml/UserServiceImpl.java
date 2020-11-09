@@ -99,24 +99,36 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Map<String, Object> userLogin(String email, String password) {
+    public Map<String, Object> userLogin(String email, String passwordInput) {
         //查找结果
-        List<User> userList = userDao.queryUserUserByEmailAndPassword(email, password);
+        List<User> userList = userDao.queryUserUserByEmail(email);
         //定义需要返回的结果集
         Map<String, Object> map = new HashMap<>();
         //判断结果
         if (userList.size() == 1) {
-            map.put("result", true);
-            map.put("user", userList.get(0));
+            //获取数据库的用户并校验
+            String dbPwd = userList.get(0).getPassword();
+            if (passwordInput.equals(dbPwd)) {
+                map.put("result", true);
+                map.put("user", userList.get(0));
+            } else {
+                map.put("result", false);
+                map.put("errorMsg", "邮箱地址或密码错误");
+            }
         } else {
             map.put("result", false);
             if (userList.size() == 0) {
-                map.put("errorMsg", "用户名或密码错误");
+                map.put("errorMsg", "该邮箱地址不存在");
             } else {
                 map.put("errorMsg", "用户邮箱地址重复，请联系管理员");
             }
         }
         return map;
+    }
+
+    @Override
+    public List<User> findUserByEmail(String emailInput) {
+        return userDao.queryUserUserByEmail(emailInput);
     }
 
 

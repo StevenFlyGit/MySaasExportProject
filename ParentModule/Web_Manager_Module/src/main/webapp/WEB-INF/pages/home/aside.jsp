@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ include file="../base.jsp"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" language="java" %>
 <aside class="main-sidebar">
@@ -41,7 +42,10 @@
                             </c:if>
                         </c:forEach>
                          --%>
-
+            <%--通过jsp标签来控制权限--%>
+            <shiro:hasPermission name="用户管理">
+                <a href="http://www.baidu.com">有用户管理权限才能看到的字</a>
+            </shiro:hasPermission>
             <c:forEach items="${sessionScope.moduleList}" var="module">
             <c:if test="${module.ctype == 0}">
                 <li class="treeview">
