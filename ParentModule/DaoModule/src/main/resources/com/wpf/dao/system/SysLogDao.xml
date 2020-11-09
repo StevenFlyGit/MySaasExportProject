@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 映射文件的命名空间必须是所对应接口的路径 -->
+<mapper namespace="com.wpf.dao.system.SysLogDao">
+
+    <resultMap id="sysLog" type="com.wpf.domain.system.SysLog">
+        <id column="id" property="id" />
+        <result column="user_name" property="userName" />
+        <result column="ip" property="ip" />
+        <result column="time" property="time" />
+        <result column="method" property="method" />
+        <result column="action" property="action" />
+        <result column="company_id" property="companyId" />
+        <result column="company_name" property="companyName" />
+    </resultMap>
+
+    <select id="queryRoleByCompanyId" resultMap="sysLog">
+        select * from st_sys_log where company_id=#{companyId}
+    </select>
+
+    <insert id="insertLog">
+        insert into st_sys_log (id, user_name, ip, time, method, action,company_id,company_name)
+        values (#{id}, #{userName}, #{ip}, #{time}, #{method},#{action},#{companyId},#{companyName})
+    </insert>
+</mapper>

@@ -2,16 +2,20 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
 
+    <!--配置注解包扫描-->
     <context:component-scan base-package="com.wpf.web"/>
 
+    <!--配置视图解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="viewResolver">
         <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
-
+    <!--注解驱动(自动创建处理器映射器、处理器适配器)、更新类型转换器-->
     <mvc:annotation-driven conversion-service="conversionServiceFactory"/>
+
     <bean class="org.springframework.context.support.ConversionServiceFactoryBean" id="conversionServiceFactory">
         <property name="converters">
             <set>
@@ -20,7 +24,9 @@
             </set>
         </property>
     </bean>
-
+    <!--放行静态资源-->
     <mvc:default-servlet-handler/>
 
+    <!--开启Aop自动代理，Aop注解支持-->
+    <aop:aspectj-autoproxy/>
 </beans>
