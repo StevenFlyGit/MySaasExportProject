@@ -7,13 +7,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="DaoModule" />
+        <module name="Company_Interface" />
+        <module name="Company_Portal" />
         <module name="Service_System_Module" />
         <module name="DomainModule" />
+        <module name="Company_Service" />
         <module name="Web_Manager_Module" />
+        <module name="DaoModule" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Company_Interface" target="1.8" />
+      <module name="Company_Portal" target="1.8" />
+      <module name="Company_Service" target="1.8" />
       <module name="DaoModule" target="1.8" />
       <module name="DomainModule" target="1.8" />
       <module name="ParentModule" target="1.8" />

@@ -2,6 +2,7 @@ package com.wpf.domain.company;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -10,7 +11,7 @@ import java.util.Date;
  * @author wpf
  */
 @Data
-public class Company {
+public class Company implements Serializable {
     private String  id;
     private String  name;
     private Date    expirationDate;

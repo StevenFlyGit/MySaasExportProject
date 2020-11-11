@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/ParentModule/Company_Interface/Company_Interface.iml" filepath="$PROJECT_DIR$/ParentModule/Company_Interface/Company_Interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ParentModule/Company_Portal/Company_Portal.iml" filepath="$PROJECT_DIR$/ParentModule/Company_Portal/Company_Portal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ParentModule/Company_Service/Company_Service.iml" filepath="$PROJECT_DIR$/ParentModule/Company_Service/Company_Service.iml" />
       <module fileurl="file://$PROJECT_DIR$/ParentModule/DaoModule/DaoModule.iml" filepath="$PROJECT_DIR$/ParentModule/DaoModule/DaoModule.iml" />
       <module fileurl="file://$PROJECT_DIR$/ParentModule/DomainModule/DomainModule.iml" filepath="$PROJECT_DIR$/ParentModule/DomainModule/DomainModule.iml" />
       <module fileurl="file://$PROJECT_DIR$/ParentModule/ParentModule.iml" filepath="$PROJECT_DIR$/ParentModule/ParentModule.iml" />
