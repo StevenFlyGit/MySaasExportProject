@@ -3,12 +3,14 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
     <!--配置服务提供者名称，可以随意命名，但通常配置为项目名，必须要唯一-->
-    <dubbo:application name="dubbo_provider"/>
+    <dubbo:application name="Company_Service"/>
     <!--配置连接中心的地址信息-->
     <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
     <!--配置服务提供者采用的通信协议和通信端口(注意不能和其他服务提供者和计算机的其他服务端口冲突)-->
-    <dubbo:protocol name="dubbo" port="20258"/>
+    <dubbo:protocol name="dubbo" port="20881"/>
     <!--开启dubbo注解扫描-->
     <dubbo:annotation package="com.wpf.service"/>
+    <!--<bean class="com.wpf.service.company.impl.CompanyServiceImpl" id="companyService"/>
+    <dubbo:service interface="com.wpf.service.company.CompanyService" ref="companyService"/>-->
 
 </beans>

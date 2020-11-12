@@ -1,8 +1,10 @@
 package com.wpf.web.controller.companey;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.wpf.domain.company.Company;
-import com.wpf.service.company.CompanyService;
+
 import lombok.extern.slf4j.Slf4j;
+import com.wpf.service.company.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +22,7 @@ import java.util.Date;
 @RequestMapping("/company")
 public class CompanyController {
 
-    @Autowired
+    @Reference
     private CompanyService companyService;
 
     @RequestMapping("/list")

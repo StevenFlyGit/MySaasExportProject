@@ -3,7 +3,8 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:aop="http://www.springframework.org/schema/aop"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
     <!--配置注解包扫描-->
     <context:component-scan base-package="com.wpf.web"/>
@@ -24,9 +25,20 @@
             </set>
         </property>
     </bean>
+
     <!--放行静态资源-->
     <mvc:default-servlet-handler/>
 
     <!--开启Aop自动代理，Aop注解支持-->
     <aop:aspectj-autoproxy/>
+
+    <!--dubbo配置-->
+    <dubbo:application name="Web_Manager_Module"/>
+    <!--配置zookeeper注册中心-->
+    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
+    <!--<dubbo:registry address="zookeeper://127.0.0.1" port="2181"/>-->
+    <!--配置dubbo的注解包扫描，用于扫描@Reference注解-->
+    <dubbo:annotation package="com.wpf.web"/>
+
+
 </beans>

@@ -41,18 +41,14 @@ public class LogAspect {
      * @param pcj 需要执行的方法对象
      * @return 执行的结果
      */
-    //@Around("execution(* com.wpf.web.controller..*.*(..))") //采用环绕通知来记录日志，因为只有这种方式能获取执行方法的信息
+    @Around("execution(* com.wpf.web.controller..*.*(..))") //采用环绕通知来记录日志，因为只有这种方式能获取执行方法的信息
     public Object saveLog(ProceedingJoinPoint pcj) {
-
         try {
-
             //先执行方法
             Object result = pcj.proceed();
-
             //记录日志信息到数据库中
             String userIp = request.getRemoteAddr(); //获取访问用户的Ip
             User user = (User) request.getSession().getAttribute("LoginUser");//从session域中获取用户对象
-
             //获取用户的相关信息(先要进行非空校验)
             String userName = "";
             String companyName = "";
@@ -62,7 +58,6 @@ public class LogAspect {
                 companyName = user.getCompanyName();
                 companyId = user.getCompanyId();
             }
-
             //创建并封装日志对象，才有lomBook的方式
             SysLog controllerLog = SysLog.builder()
                     .companyId(companyId)
@@ -73,10 +68,8 @@ public class LogAspect {
                     .action(pcj.getTarget().getClass().getName()) //获取目标对象的全名
                     .userName(userName)
                     .build();
-
             //调用SysLog业务来存储日志信息
             sysLogService.saveLog(controllerLog);
-
             return result;
         } catch (Throwable throwable) {
             throwable.printStackTrace();
@@ -85,7 +78,7 @@ public class LogAspect {
     }
 
     //利用了Slf4j注解生成的日志类和log4j框架来记录日志
-    @Around("execution(* com.wpf.web.controller..*.*(..))")
+    //@Around("execution(* com.wpf.web.controller..*.*(..))")
     public Object saveLogByLog4j(ProceedingJoinPoint pcj) {
         try {
             //调用日志类在方法执行前记录日志(利用了log4j框架和Slf4j注解)

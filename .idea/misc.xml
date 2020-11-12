@@ -5,6 +5,7 @@
     <file type="web" url="file://$PROJECT_DIR$/ParentModule/Company_Portal" />
     <file type="web" url="file://$PROJECT_DIR$/ParentModule/Company_Service" />
     <file type="web" url="file://$PROJECT_DIR$/ParentModule/Web_Manager_Module" />
+    <file type="web" url="file://$PROJECT_DIR$/ParentModule/WebModule" />
     <file type="web" url="file://$PROJECT_DIR$/../ParentModule/Web_Manager_Module" />
   </component>
   <component name="MavenProjectsManager">
@@ -17,6 +18,7 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/ParentModule/WebModule/pom.xml" />
         <option value="$PROJECT_DIR$/../ParentModule/Service_System_Module/Web_Manager_Module/pom.xml" />
       </set>
     </option>

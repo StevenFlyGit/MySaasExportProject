@@ -19,7 +19,7 @@ public class MD5Test {
 
     @Test
     public void md5WithSalt() {
-        Md5Hash md5Hash = new Md5Hash("123", "test@itheima.com");
+        Md5Hash md5Hash = new Md5Hash("1", "testSaasAdmin@export.com");
         System.out.println(md5Hash.toString());
     }
 

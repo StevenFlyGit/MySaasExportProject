@@ -1,10 +1,10 @@
 package com.wpf.service.company.impl;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.wpf.dao.company.CompanyDao;
 import com.wpf.domain.company.Company;
 import com.wpf.service.company.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.alibaba.dubbo.config.annotation.Service;
 
 import java.util.List;
 import java.util.UUID;
@@ -14,7 +14,7 @@ import java.util.UUID;
  * SassExport项目-Service层实现类
  * @author wpf
  */
-@Service
+@Service(timeout = 1000000000)
 public class CompanyServiceImpl implements CompanyService {
 
     @Autowired

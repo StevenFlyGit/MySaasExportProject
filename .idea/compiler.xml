@@ -25,6 +25,7 @@
       <module name="ParentModule" target="1.8" />
       <module name="Service_System_Module" target="1.8" />
       <module name="Web_Manager_Module" target="1.8" />
+      <module name="WebModule" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
