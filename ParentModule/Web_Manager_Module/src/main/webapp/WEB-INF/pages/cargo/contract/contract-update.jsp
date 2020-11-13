@@ -124,7 +124,11 @@
 
                     <div class="col-md-2 title">打印版式</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="打印版式" name="printStyle" value="${contract.printStyle}">
+                        <%--<input type="text" class="form-control" placeholder="打印版式" name="printStyle" value="${contract.printStyle}">--%>
+                        <div class="form-group form-inline">
+                            <div class="radio"><label><input type="radio" ${contract.printStyle==2?'checked':''} name="printStyle" value="2">一页两个货物</label></div>
+                            <div class="radio"><label><input type="radio" ${contract.printStyle==1?'checked':''} name="printStyle" value="1">一页一个货物</label></div>
+                        </div>
                     </div>
                     <div class="col-md-2 title">总金额</div>
                     <div class="col-md-4 data">

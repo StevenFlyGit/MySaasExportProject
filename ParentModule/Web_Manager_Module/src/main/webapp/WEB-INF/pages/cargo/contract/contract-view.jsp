@@ -108,7 +108,7 @@
 
                     <div class="col-md-2 title">打印版式</div>
                     <div class="col-md-4 data" style="line-height:34px">
-                        ${contract.printStyle}
+                        ${contract.printStyle==1?'一页一个货物':'一页两个货物'}
                     </div>
                     <div class="col-md-2 title">总金额</div>
                     <div class="col-md-4 data" style="line-height:34px">

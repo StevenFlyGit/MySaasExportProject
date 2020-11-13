@@ -14,7 +14,7 @@ import java.util.UUID;
  * SassExport项目-Service层实现类
  * @author wpf
  */
-@Service(timeout = 1000000000)
+@Service(timeout = 5000000)
 public class CompanyServiceImpl implements CompanyService {
 
     @Autowired
