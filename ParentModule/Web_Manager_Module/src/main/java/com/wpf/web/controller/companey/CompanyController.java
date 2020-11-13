@@ -26,13 +26,13 @@ public class CompanyController {
     private CompanyService companyService;
 
     @RequestMapping("/list")
-    private String surfController(Model model) {
+    public String surfController(Model model) {
         model.addAttribute("CompanyList", companyService.findAllCompanies());
         return "company/company-list";
     }
 
     @RequestMapping("/addDate")
-    private String surfController(Date date) {
+    public String surfController(Date date) {
         System.out.println(date);
         return "success";
     }
@@ -42,7 +42,7 @@ public class CompanyController {
      * @return page
      */
     @RequestMapping("/toUpdate")
-    private String jumpToAddPage(String id, Model model) {
+    public String jumpToAddPage(String id, Model model) {
         Company company = companyService.findOneCompanyById(id);
         model.addAttribute("company", company);
         return "company/company-update";
@@ -54,7 +54,7 @@ public class CompanyController {
      * @return page
      */
     @RequestMapping("/edit")
-    private String edit(Company company) {
+    public String edit(Company company) {
         if (StringUtils.isEmpty(company.getId())) {
             companyService.saveOneCompany(company);
         } else {

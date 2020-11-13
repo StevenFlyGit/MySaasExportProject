@@ -41,7 +41,7 @@ public class LogAspect {
      * @param pcj 需要执行的方法对象
      * @return 执行的结果
      */
-    @Around("execution(* com.wpf.web.controller..*.*(..))") //采用环绕通知来记录日志，因为只有这种方式能获取执行方法的信息
+    //@Around("execution(* com.wpf.web.controller..*.*(..))") //采用环绕通知来记录日志，因为只有这种方式能获取执行方法的信息
     public Object saveLog(ProceedingJoinPoint pcj) {
         try {
             //先执行方法
@@ -78,7 +78,7 @@ public class LogAspect {
     }
 
     //利用了Slf4j注解生成的日志类和log4j框架来记录日志
-    //@Around("execution(* com.wpf.web.controller..*.*(..))")
+    @Around("execution(* com.wpf.web.controller..*.*(..))")
     public Object saveLogByLog4j(ProceedingJoinPoint pcj) {
         try {
             //调用日志类在方法执行前记录日志(利用了log4j框架和Slf4j注解)
