@@ -54,9 +54,8 @@ public class ContractController extends BaseController {
 
     /**
      * 跳转到添加contract的页面，回显数据
-     * 将所有的contract对象(除了其本身)显示到添加页面中，用于选择上级部门
-     * @param id 需要修改的角色的Id值
-     * @return
+     * @param id 需要修改的合同的Id值
+     * @return page
      */
     @RequestMapping("/toUpdate")
     public String jumpToUpdatePage(Model model, String id) {
@@ -70,7 +69,7 @@ public class ContractController extends BaseController {
 
     /**
      * 查询下拉列表并跳转到添加页面
-     * @return
+     * @return page
      */
     @RequestMapping("/toAdd")
     public String jumpToAddPage() {

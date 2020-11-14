@@ -71,10 +71,10 @@ public class ProductController extends BaseController {
     }
 
     /**
-     * 跳转到添加product的页面，回显数据
-     * 将所有的product对象(除了其本身)显示到添加页面中，用于选择上级部门
-     * @param id 需要修改的角色的Id值
-     * @return
+     * 跳转到修改product的页面，回显数据
+     * 将所有的factory数据显示到修改页面中，用于选择生产厂家
+     * @param id 需要修改的货物的Id值
+     * @return page
      */
     @RequestMapping("/toUpdate")
     public String jumpToUpdatePage(Model model, String id) {
