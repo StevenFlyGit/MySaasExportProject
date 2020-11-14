@@ -4,7 +4,6 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.github.pagehelper.PageInfo;
 import com.wpf.domain.cargo.Contract;
 import com.wpf.domain.cargo.ContractExample;
-import com.wpf.domain.system.Module;
 import com.wpf.domain.system.User;
 import com.wpf.service.cargo.ContractService;
 import com.wpf.web.controller.BaseController;
@@ -13,9 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.*;
+import java.util.Date;
 
 /**
  * 创建时间：2020/11/13
@@ -75,7 +73,7 @@ public class ContractController extends BaseController {
      * @return
      */
     @RequestMapping("/toAdd")
-    public String jumpToAddPage(Model model) {
+    public String jumpToAddPage() {
         return "/cargo/contract/contract-add";
     }
 
@@ -95,7 +93,6 @@ public class ContractController extends BaseController {
             User user = getLoginUser();
             contract.setCreateBy(user.getId());
             contract.setCreateDept(user.getDeptId());
-            contract.setCreateTime(new Date());
             contractService.save(contract);
         } else {
             contractService.update(contract);
@@ -106,7 +103,7 @@ public class ContractController extends BaseController {
     /**
      * 删除数据的控制器方法
      * @param id 需要删除的数据的Id值
-     * @return json数据
+     * @return page
      */
     @RequestMapping("/delete")
     public String removeContract(String id) {

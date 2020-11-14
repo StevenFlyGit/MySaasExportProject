@@ -40,16 +40,16 @@
         <div class="panel panel-default">
             <div class="panel-heading">编辑货物</div>
             <form id="editForm" action="${ctx}/cargo/contractProduct/edit.do" method="post" enctype="multipart/form-data">
-                <input type="text" name="id" value="${contractProduct.id}">
-                <input type="text" name="contractId" value="${contractProduct.contractId}">
-                <input type="text"  name="factoryName" id="factoryName" value="${contractProduct.factoryName}">
+                <%--<input type="text" name="id">--%>
+                <input type="hidden" name="contractId">
+                <input type="hidden"  name="factoryName" id="factoryName">
                 <div class="row data-type" style="margin: 0px">
                     <div class="col-md-2 title">生产厂家</div>
                     <div class="col-md-4 data">
                         <select class="form-control" name="factoryId" id="factoryInfo" onchange="document.getElementById('factoryName').value=this.options[this.selectedIndex].text">
                             <option value="">请选择</option>
                             <c:forEach items="${factoryList}" var="factory">
-                                <option value="${factory.id}" ${contractProduct.factoryId eq factory.id ? "selected" : ""}>
+                                <option value="${factory.id}">
                                         ${factory.factoryName}
                                 </option>
                             </c:forEach>
@@ -58,7 +58,7 @@
 
                     <div class="col-md-2 title">货号</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="货号" name="productNo" value="${contractProduct.productNo}">
+                        <input type="text" class="form-control" placeholder="货号" name="productNo">
                     </div>
 
                     <div class="col-md-2 title">货物照片</div>
@@ -85,43 +85,43 @@
 
                     <div class="col-md-2 title">数量</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="数量" name="cnumber" value="${contractProduct.cnumber}">
+                        <input type="text" class="form-control" placeholder="数量" name="cnumber" >
                     </div>
 
                     <div class="col-md-2 title">包装单位</div>
                     <div class="col-md-4 data">
                         <div class="form-group form-inline">
-                            <div class="radio"><label><input type="radio" ${contractProduct.packingUnit=="PCS"?'checked':''} name="packingUnit" value="PCS">PCS</label></div>
-                            <div class="radio"><label><input type="radio" ${contractProduct.packingUnit=="SETS"?'checked':''} name="packingUnit" value="SETS">SETS</label></div>
+                            <div class="radio"><label><input type="radio" name="packingUnit" value="PCS">PCS</label></div>
+                            <div class="radio"><label><input type="radio" name="packingUnit" value="SETS">SETS</label></div>
                         </div>
                     </div>
 
                     <div class="col-md-2 title">装率</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="装率" name="loadingRate" value="${contractProduct.loadingRate}">
+                        <input type="text" class="form-control" placeholder="装率" name="loadingRate">
                     </div>
 
                     <div class="col-md-2 title">箱数</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="箱数" name="boxNum" value="${contractProduct.boxNum}">
+                        <input type="text" class="form-control" placeholder="箱数" name="boxNum">
                     </div>
 
                     <div class="col-md-2 title">单价</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="单价" name="price" value="${contractProduct.price}">
+                        <input type="text" class="form-control" placeholder="单价" name="price">
                     </div>
                     <div class="col-md-2 title">排序号</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="排序号" name="orderNo" value="${contractProduct.orderNo}">
+                        <input type="text" class="form-control" placeholder="排序号" name="orderNo">
                     </div>
                     <div class="col-md-2 title rowHeight2x">货物描述</div>
                     <div class="col-md-4 data  rowHeight2x">
-                        <textarea class="form-control" rows="3" placeholder="货物描述" name="productDesc">${contractProduct.productDesc}</textarea>
+                        <textarea class="form-control" rows="3" placeholder="货物描述" name="productDesc"></textarea>
                     </div>
 
                     <div class="col-md-2 title rowHeight2x">要求</div>
                     <div class="col-md-4 data  rowHeight2x">
-                        <textarea class="form-control" rows="3" placeholder="要求" name="productRequest">${contractProduct.productRequest}</textarea>
+                        <textarea class="form-control" rows="3" placeholder="要求" name="productRequest"></textarea>
                     </div>
                 </div>
             </form>

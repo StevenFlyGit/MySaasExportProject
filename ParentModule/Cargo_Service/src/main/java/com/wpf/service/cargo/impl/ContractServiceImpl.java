@@ -9,6 +9,7 @@ import com.wpf.domain.cargo.ContractExample;
 import com.wpf.service.cargo.ContractService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -52,6 +53,8 @@ public class ContractServiceImpl implements ContractService {
         contract.setProNum(0);
         contract.setExtNum(0);
         contract.setTotalAmount(0.0);
+        //设置时间
+        contract.setCreateTime(new Date());
         //设置购销合同状态为0，表示是草稿
         contract.setState(0);
 

@@ -25,7 +25,7 @@ public interface ContractProductService {
     /**
      * 查询所有
      */
-    List<ContractProduct> findAll(ContractProductExample ContractProductExample);
+    List<ContractProduct> findAll(ContractProductExample contractProductExample);
 
     /**
      * 根据id查询
