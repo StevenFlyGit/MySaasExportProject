@@ -361,4 +361,7 @@
     </update>
 
 
+    <select id="selectByParentDept" resultMap="BaseResultMap">
+        select * from co_contract where find_in_set(create_dept, getDeptChild(#{deptId}))
+    </select>
 </mapper>

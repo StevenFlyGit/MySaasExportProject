@@ -13,6 +13,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -89,15 +90,15 @@ public class ExtCproductController extends BaseController {
      */
     @RequestMapping("/edit")
     public String editExtCproduct(ExtCproduct extCproduct) {
-        //设置合同的企业信息
+        //设置附件的企业信息
         extCproduct.setCompanyId(getCompanyId());
         extCproduct.setCompanyName(getCompanyName());
 
         if (StringUtils.isEmpty(extCproduct.getId())) {
             //设置操作用户的相关信息
-            User user = getLoginUser();
-            extCproduct.setCreateBy(user.getId());
-            extCproduct.setCreateDept(user.getDeptId());
+//            User user = getLoginUser();
+//            extCproduct.setCreateBy(user.getId());
+//            extCproduct.setCreateDept(user.getDeptId());
             extCproductService.save(extCproduct);
         } else {
             extCproductService.update(extCproduct);

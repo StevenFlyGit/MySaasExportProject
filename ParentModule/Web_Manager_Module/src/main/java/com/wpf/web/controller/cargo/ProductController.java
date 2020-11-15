@@ -99,7 +99,7 @@ public class ProductController extends BaseController {
      */
     @RequestMapping("/edit")
     public String editProduct(ContractProduct product, MultipartFile productPhoto) {
-        //设置合同的企业信息
+        //设置货物的企业信息
         product.setCompanyId(getCompanyId());
         product.setCompanyName(getCompanyName());
 
@@ -115,9 +115,9 @@ public class ProductController extends BaseController {
 
         if (StringUtils.isEmpty(product.getId())) {
             //设置操作用户的相关信息
-            User user = getLoginUser();
-            product.setCreateBy(user.getId());
-            product.setCreateDept(user.getDeptId());
+//            User user = getLoginUser();
+//            product.setCreateBy(user.getId());
+//            product.setCreateDept(user.getDeptId());
             contractProductService.save(product);
         } else {
             contractProductService.update(product);

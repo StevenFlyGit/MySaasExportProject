@@ -63,11 +63,23 @@ public class ContractServiceImpl implements ContractService {
 
     @Override
     public void update(Contract contract) {
+        //设置修改时间
+        contract.setUpdateTime(new Date());
         contractDao.updateByPrimaryKeySelective(contract);
     }
 
     @Override
     public void delete(String id) {
         contractDao.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public PageInfo<Contract> findByParentDept(String deptId, int pageNum, int pageSize) {
+        //启动分页功能
+        PageHelper.startPage(pageNum, pageSize);
+        //查询列表
+        List<Contract> contractList = contractDao.selectByParentDept(deptId);
+        //封装pageInfo对象并返回
+        return new PageInfo<>(contractList);
     }
 }

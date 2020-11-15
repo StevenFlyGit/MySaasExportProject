@@ -43,11 +43,24 @@ public class ContractController extends BaseController {
         //将查询条件设置为降序排序
         ContractExample example = new ContractExample();
         example.setOrderByClause("create_time desc");
-        //设置查询条件为companyId
+        //设置查询条件为companyId(设置细粒度权限后可不用设置)
         ContractExample.Criteria criteria = example.createCriteria();
-        criteria.andCompanyIdEqualTo(companyId);
+//        criteria.andCompanyIdEqualTo(companyId);
+        PageInfo<Contract> pageInfo = null;
+        //根据登录用户的degree属性级别，进行细粒度的权限控制，控制用户能查看的购销合同
+        if (getLoginUser().getDegree() == 2) {
+            //该用户可以查看到其所属部门及其子部门的所有合同数据、
+            pageInfo = contractService.findByParentDept(getLoginUser().getDeptId(), pageNum, pageSize);
+        } else if (getLoginUser().getDegree() == 3) {
+            //该用户可以查看到其所属部门的合同数据
+            criteria.andCreateDeptEqualTo(getLoginUser().getDeptId());
+            pageInfo = contractService.findByPage(example, pageNum, pageSize);
+        } else if (getLoginUser().getDegree() == 4) {
+            //该用户仅可查看到其自己添加的合同数据
+            criteria.andCreateByEqualTo(getLoginUser().getId());
+            pageInfo = contractService.findByPage(example, pageNum, pageSize);
+        }
 
-        PageInfo<Contract> pageInfo = contractService.findByPage(example, pageNum, pageSize);
         model.addAttribute("pageInfo", pageInfo);
         return "/cargo/contract/contract-list";
     }
@@ -87,13 +100,14 @@ public class ContractController extends BaseController {
         contract.setCompanyId(getCompanyId());
         contract.setCompanyName(getCompanyName());
 
+        User user = getLoginUser();
         if (StringUtils.isEmpty(contract.getId())) {
             //设置操作用户的相关信息
-            User user = getLoginUser();
             contract.setCreateBy(user.getId());
             contract.setCreateDept(user.getDeptId());
             contractService.save(contract);
         } else {
+            contract.setUpdateBy(user.getId());
             contractService.update(contract);
         }
         return "redirect:/cargo/contract/list";
