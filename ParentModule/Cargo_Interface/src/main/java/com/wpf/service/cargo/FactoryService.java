@@ -44,6 +44,11 @@ public interface FactoryService {
      * 删除部门
      */
     void delete(String id);
+
+    /**
+     * 根据厂家名称查询数据
+     */
+    Factory findByName(String factoryName);
 }
 
 

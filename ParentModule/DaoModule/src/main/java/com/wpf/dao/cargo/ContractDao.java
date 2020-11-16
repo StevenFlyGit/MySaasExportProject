@@ -2,6 +2,7 @@ package com.wpf.dao.cargo;
 
 import com.wpf.domain.cargo.Contract;
 import com.wpf.domain.cargo.ContractExample;
+import com.wpf.vo.ContractProductVo;
 
 import java.util.List;
 
@@ -24,4 +25,6 @@ public interface ContractDao {
 
     //查询表中本部门及子部门的购销合同数据
     List<Contract> selectByParentDept(String deptId);
+
+    List<ContractProductVo> selectTableVoByShipTime(String shipDateString);
 }

@@ -364,4 +364,21 @@
     <select id="selectByParentDept" resultMap="BaseResultMap">
         select * from co_contract where find_in_set(create_dept, getDeptChild(#{deptId}))
     </select>
+
+
+    <select id="selectTableVoByShipTime" resultType="com.wpf.vo.ContractProductVo">
+        select
+        cc.custom_name customName,
+        cc.contract_no contractNo,
+        ccp.product_no productNo,
+        ccp.cnumber cnumber,
+        ccp.factory_name factoryName,
+        cc.delivery_period deliveryPeriod,
+        cc.ship_time shipTime,
+        cc.trade_terms tradeTerms
+        from co_contract cc , co_contract_product ccp
+        where cc.ship_time like #{shipDateString}
+        and
+        cc.id = ccp.contract_id;
+    </select>
 </mapper>

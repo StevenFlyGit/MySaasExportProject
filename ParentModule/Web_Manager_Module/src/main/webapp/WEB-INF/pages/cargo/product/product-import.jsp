@@ -44,11 +44,11 @@
         <div class="panel panel-default">
             <div class="panel-heading">导入货物</div>
             <form id="editForm" action="/cargo/contractProduct/import.do" method="post" enctype="multipart/form-data">
-                <input type="text"  name="contractId" value="${contractId}">
+                <input type="hidden" name="contractId" value="${contractId}">
                 <div class="row data-type" style="margin: 0px">
                     <div class="col-md-2 title">选择文件</div>
                     <div class="col-md-4 data">
-                        <input type="file" class="form-control" placeholder="选择文件" name="file">
+                        <input type="file" class="form-control" placeholder="选择文件" name="productFile">
                     </div>
                     <p class="help-block">每次导入仅可添加100条货物。生产厂家,货号,数量,包装单位,装率,箱数,单价为必填项
                     </p>

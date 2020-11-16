@@ -7,6 +7,7 @@ import com.wpf.dao.cargo.ContractDao;
 import com.wpf.domain.cargo.Contract;
 import com.wpf.domain.cargo.ContractExample;
 import com.wpf.service.cargo.ContractService;
+import com.wpf.vo.ContractProductVo;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
@@ -81,5 +82,11 @@ public class ContractServiceImpl implements ContractService {
         List<Contract> contractList = contractDao.selectByParentDept(deptId);
         //封装pageInfo对象并返回
         return new PageInfo<>(contractList);
+    }
+
+    @Override
+    public List<ContractProductVo> findTableVoByShipTime(String shipDateString) {
+        shipDateString = shipDateString + "%";
+        return contractDao.selectTableVoByShipTime(shipDateString);
     }
 }

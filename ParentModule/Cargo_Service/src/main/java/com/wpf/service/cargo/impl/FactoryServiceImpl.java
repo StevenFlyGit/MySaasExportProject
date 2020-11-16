@@ -51,4 +51,16 @@ public class FactoryServiceImpl implements FactoryService {
     public void delete(String id) {
 
     }
+
+    @Override
+    public Factory findByName(String factoryName) {
+        //创建查询规则对象
+        FactoryExample example = new FactoryExample();
+        FactoryExample.Criteria criteria = example.createCriteria();
+        criteria.andFactoryNameEqualTo(factoryName);
+        //调用内部方法查询相同名称的厂家列表
+        List<Factory> factoryList = findAll(example);
+        //条件判断，若不为空则返回集合的第一条数据，否则返回null
+        return factoryList != null && factoryList.size() > 0 ? factoryList.get(0) : null;
+    }
 }

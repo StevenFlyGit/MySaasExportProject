@@ -6,11 +6,14 @@ import com.wpf.domain.cargo.ContractProduct;
 import com.wpf.domain.cargo.ContractProductExample;
 import com.wpf.domain.cargo.Factory;
 import com.wpf.domain.cargo.FactoryExample;
-import com.wpf.domain.system.User;
 import com.wpf.service.cargo.ContractProductService;
 import com.wpf.service.cargo.FactoryService;
 import com.wpf.web.controller.BaseController;
 import com.wpf.web.util.FileUploadUtil;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Date;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -95,6 +98,9 @@ public class ProductController extends BaseController {
     /**
      * 编辑数据的控制器方法，可执行修改或添加操作
      * @param product 需要添加或修改的product对象
+     * @param productPhoto 通过表单的文件域获取的文件对象，
+     *                     注意要接受此对象必须在前端将form的enctype属性设置为multipart/form-data
+     *                     且必须在配置文件中配置spring的文件解析器
      * @return page
      */
     @RequestMapping("/edit")
@@ -134,6 +140,60 @@ public class ProductController extends BaseController {
     public String removeProduct(String id, String contractId) {
         contractProductService.delete(id);
         return "redirect:/cargo/contractProduct/list?contractId=" + contractId;
+    }
+
+    /**
+     * 跳转到利用excel表格来上传货物数据的页面
+     * @param contractId 货物对应的购销合同Id
+     * @return page
+     */
+    @RequestMapping("/toImport")
+    public String jumpToImportPage(Model model, String contractId) {
+        model.addAttribute("contractId", contractId);
+        return "/cargo/product/product-import";
+    }
+
+    /**
+     * 上传某个购销合同的货物文件，并将数据保存到数据库
+     * @param contractId 货物对应的购销合同Id
+     * @param productFile 通过表单的文件域获取的文件对象，
+     *                    注意要接受此对象必须在前端将form的enctype属性设置为multipart/form-data
+     *                    且必须在配置文件中配置spring的文件解析器
+     * @return page
+     */
+    @RequestMapping("/import")
+    public String importProductTable(String contractId, MultipartFile productFile) throws IOException {
+        //使用Apache的POI组件来加载excel表格
+        Workbook workBook = new XSSFWorkbook(productFile.getInputStream());
+        //加载工作表
+        Sheet sheet = workBook.getSheetAt(0);
+        //获取表格行数
+        int rowNum = sheet.getPhysicalNumberOfRows();
+        //按照规定的模板，从第二行第二列开始读取数据并封装实体类
+        for (int i = 1; i < rowNum; i++) {
+            Row row = sheet.getRow(i);
+            ContractProduct product = new ContractProduct();
+            product.setFactoryName(row.getCell(1).getStringCellValue());
+            product.setProductNo(row.getCell(2).getStringCellValue());
+            product.setCnumber((int) row.getCell(3).getNumericCellValue());
+            product.setPackingUnit(row.getCell(4).getStringCellValue());
+            product.setLoadingRate(row.getCell(5).getStringCellValue());
+            product.setBoxNum((int) row.getCell(6).getNumericCellValue());
+            product.setPrice(row.getCell(7).getNumericCellValue());
+            product.setProductDesc(row.getCell(8).getStringCellValue());
+            product.setProductRequest(row.getCell(9).getStringCellValue());
+            //设置购销合同Id
+            product.setContractId(contractId);
+            //设置生产厂家Id
+            Factory factory = factoryService.findByName(row.getCell(1).getStringCellValue());
+            if (factory != null) {
+                product.setFactoryId(factory.getId());
+            }
+            //保存到数据库
+            contractProductService.save(product);
+        }
+
+        return "redirect:/cargo/contract/list";
     }
 
 }

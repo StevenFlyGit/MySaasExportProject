@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
 
@@ -170,4 +171,15 @@ public class ContractController extends BaseController {
         contractService.update(contract);
         return "redirect:/cargo/contract/list";
     }
+
+    /**
+     * 跳转到打印出货表的页面
+     * @return page
+     */
+    @RequestMapping("/print")
+    public String jumpToPage() {
+        return "cargo/print/contract-print";
+    }
+
+
 }

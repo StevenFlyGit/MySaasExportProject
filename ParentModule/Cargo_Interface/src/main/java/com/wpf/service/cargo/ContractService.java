@@ -4,6 +4,7 @@ package com.wpf.service.cargo;
 import com.github.pagehelper.PageInfo;
 import com.wpf.domain.cargo.Contract;
 import com.wpf.domain.cargo.ContractExample;
+import com.wpf.vo.ContractProductVo;
 
 import java.util.List;
 
@@ -53,6 +54,10 @@ public interface ContractService {
      */
     PageInfo<Contract> findByParentDept(String deptId, int pageNum, int pageSize);
 
+    /**
+     * 根据船期查找数据
+     */
+    List<ContractProductVo> findTableVoByShipTime(String shipDateString);
 }
 
 
