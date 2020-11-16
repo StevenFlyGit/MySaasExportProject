@@ -124,13 +124,13 @@
                             <td width="90px">出口单价</td>
                             <td width="90px">含税</td>
                         </tr>
-                        <c:forEach items="${eps}" var="o" varStatus="status">
+                        <c:forEach items="${exportProductList}" var="o" varStatus="status">
                             <tr class="odd" onmouseover="this.className='highlight'" onmouseout="this.className='odd'" >
                                 <input type="hidden" name="exportProducts[${status.index}].id" value="${o.id}"/>
                                 <td>${status.index+1}</td>
                                 <td>${o.productNo}</td>
                                 <td>
-                                    <input style="width: 90px" name="exportProducts[${status.index}].cnumber" value="${o.boxNum}">
+                                    <input style="width: 90px" name="exportProducts[${status.index}].cnumber" value="${o.cnumber}">
                                 </td>
                                 <td>
                                     <input style="width: 90px" name="exportProducts[${status.index}].grossWeight" value="${o.grossWeight}">

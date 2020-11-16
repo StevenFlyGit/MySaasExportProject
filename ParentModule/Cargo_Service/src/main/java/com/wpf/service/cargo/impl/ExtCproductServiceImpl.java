@@ -17,7 +17,8 @@ import java.util.UUID;
 
 /**
  * 创建时间：2020/11/14
- *
+ * SassExport项目-Dubbo服务提供者实现类
+ * 处理货物附件的相关业务
  * @author wpf
  */
 @Service(timeout = 5000000)

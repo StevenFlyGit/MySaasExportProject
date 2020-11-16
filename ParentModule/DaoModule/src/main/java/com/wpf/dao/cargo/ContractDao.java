@@ -26,5 +26,9 @@ public interface ContractDao {
     //查询表中本部门及子部门的购销合同数据
     List<Contract> selectByParentDept(String deptId);
 
+    //查询表中本部门及子部门已提交的购销合同数据
+    List<Contract> selectByParentDeptAndState(String deptId, Integer state);
+
+    //根据船期查询出货表数据
     List<ContractProductVo> selectTableVoByShipTime(String shipDateString);
 }

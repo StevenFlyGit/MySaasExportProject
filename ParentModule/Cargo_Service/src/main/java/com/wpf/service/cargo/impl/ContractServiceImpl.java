@@ -85,6 +85,16 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
+    public PageInfo<Contract> findByParentDeptAndState(String deptId, int pageNum, int pageSize, Integer state) {
+        //启动分页功能
+        PageHelper.startPage(pageNum, pageSize);
+        //查询列表
+        List<Contract> contractList = contractDao.selectByParentDept(deptId);
+        //封装pageInfo对象并返回
+        return new PageInfo<>(contractList);
+    }
+
+    @Override
     public List<ContractProductVo> findTableVoByShipTime(String shipDateString) {
         shipDateString = shipDateString + "%";
         return contractDao.selectTableVoByShipTime(shipDateString);

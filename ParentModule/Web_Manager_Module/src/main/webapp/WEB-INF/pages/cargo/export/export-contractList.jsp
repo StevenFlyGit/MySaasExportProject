@@ -63,10 +63,20 @@
                         <div class="btn-group">
                             <button type="button" class="btn btn-default" title="查看" onclick='view()'><i class="fa  fa-eye-slash"></i> 查看</button>
                             <button type="button" class="btn btn-default" title="打印" onclick='deleteById()'><i class="fa fa-print"></i> 打印</button>
-                            <button type="button" class="btn btn-default" title="报运" onclick="document.getElementById('exportForm').submit()"><i class="fa fa-refresh"></i> 报运</button>
+                            <button type="button" class="btn btn-default" title="报运" onclick="checkContractSelected()"><i class="fa fa-refresh"></i> 报运</button>
                         </div>
                     </div>
                 </div>
+                <script>
+                    function checkContractSelected() {
+                        // let contractIds = $("input[name=contractIds]:checked");
+                        // if (contractIds.length == 0) {
+                        //     alert("请选择需要报运的合同");
+                        // } else {
+                            document.getElementById('exportForm').submit()
+                        // }
+                    }
+                </script>
                 <div class="box-tools pull-right">
                     <div class="has-feedback">
                         <input type="text" class="form-control input-sm" placeholder="搜索">
@@ -93,10 +103,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <form id="exportForm" action="/cargo/export/toExport.do" method="post">
-                        <c:forEach items="${page.rows}" var="o" varStatus="status">
+                    <form id="exportForm" action="/cargo/export/toExport.do" method="post" onsubmit="return false">
+                        <c:forEach items="${pageInfo.list}" var="o" varStatus="status">
                             <tr>
-                                <td><input type="checkbox" name="id" value="${o.id}"/></td>
+                                <td><input type="checkbox" name="contractIds" value="${o.id}"/></td>
                                 <td>${o.customName}</td>
                                 <td><a href="${ctx}/cargo/contract/toView.do?id=${o.id}">${o.contractNo}</a></td>
                                 <td>

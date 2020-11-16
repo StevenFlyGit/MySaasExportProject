@@ -365,6 +365,10 @@
         select * from co_contract where find_in_set(create_dept, getDeptChild(#{deptId}))
     </select>
 
+    <select id="selectByParentDeptAndState" resultMap="BaseResultMap">
+        select * from co_contract where find_in_set(create_dept, getDeptChild(#{param1})) and state = #{param2}
+    </select>
+
 
     <select id="selectTableVoByShipTime" resultType="com.wpf.vo.ContractProductVo">
         select

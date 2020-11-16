@@ -34,68 +34,68 @@
     <section class="content">
         <form action="/cargo/export/edit.do" method="post">
         <div class="panel panel-default">
-            <div class="panel-heading">对【${id}】出口报运</div>
-            <input type="hidden" name="contractIds" value="${id}">
+            <div class="panel-heading">对【${contractIds}】出口报运</div>
+            <input type="hidden" name="contractIds" value="${contractIds}">
             <div class="row data-type" style="margin: 0px">
                 <div class="col-md-2 title">信用证号</div>
                 <div class="col-md-4 data">
-                    <input type="text" class="form-control" placeholder="信用证号" name="lcno" value="${export.lcno}"/>
+                    <input type="text" class="form-control" placeholder="信用证号" name="lcno"/>
                 </div>
 
                 <div class="col-md-2 title">收货人及地址</div>
                 <div class="col-md-4 data">
-                    <input type="text" class="form-control" placeholder="收货人及地址" name="consignee" value="${export.consignee}"/>
+                    <input type="text" class="form-control" placeholder="收货人及地址" name="consignee"/>
                 </div>
 
                 <div class="col-md-2 title">唛头</div>
                 <div class="col-md-4 data">
-                    <input type="text" class="form-control" placeholder="唛头" name="marks" value="${export.marks}"/>
+                    <input type="text" class="form-control" placeholder="唛头" name="marks"/>
                 </div>
 
                 <div class="col-md-2 title">装运港</div>
                 <div class="col-md-4 data">
-                    <input type="text" name="shipmentPort" class="form-control" placeholder="装运港"value="${export.shipmentPort}"/>
+                    <input type="text" name="shipmentPort" class="form-control" placeholder="装运港"/>
                 </div>
 
                 <div class="col-md-2 title">目的港</div>
                 <div class="col-md-4 data">
-                    <input type="text" name="destinationPort" class="form-control" placeholder="目的港" value="${export.destinationPort}"/>
+                    <input type="text" name="destinationPort" class="form-control" placeholder="目的港"/>
                 </div>
 
                 <div class="col-md-2 title">运输方式</div>
                 <div class="col-md-4 data">
-                    <input type="text" name="transportMode" class="form-control" placeholder="运输方式" value="${export.transportMode}">
+                    <input type="text" name="transportMode" class="form-control" placeholder="运输方式"/>
                 </div>
 
                 <div class="col-md-2 title">价格条件</div>
                 <div class="col-md-4 data">
-                    <input type="text" name="priceCondition" class="form-control" placeholder="价格条件" value="${export.priceCondition}"/>
+                    <input type="text" name="priceCondition" class="form-control" placeholder="价格条件"/>
                 </div>
 
                 <div class="col-md-2 title">总箱数</div>
                 <div class="col-md-4 data">
-                    <input type="text" name="boxNums" class="form-control" placeholder="总箱数" value="${export.boxNums}"/>
+                    <input type="text" name="boxNums" class="form-control" placeholder="总箱数"/>
                 </div>
 
                 <div class="col-md-2 title">总毛重</div>
                 <div class="col-md-4 data">
-                    <input type="text" name="grossWeights" class="form-control" placeholder="总毛重"  value="${export.grossWeights}">
+                    <input type="text" name="grossWeights" class="form-control" placeholder="总毛重"/>
 
                 </div>
                 <div class="col-md-2 title">体积</div>
                 <div class="col-md-4 data">
-                    <input type="text" name="measurements" class="form-control" placeholder="体积" value="${export.measurements}">
+                    <input type="text" name="measurements" class="form-control" placeholder="体积"/>
                 </div>
 
                 <div class="col-md-2 title rowHeight2x">备注</div>
                 <div class="col-md-10 data rowHeight2x">
-                    <textarea class="form-control" rows="3" name="remark">${export.remark}</textarea>
+                    <textarea class="form-control" rows="3" name="remark"></textarea>
                 </div>
             </div>
         </div>
         <!--工具栏-->
         <div class="box-tools text-center">
-            <button type="submit"  class="btn bg-maroon">保存</button>
+            <button type="submit" class="btn bg-maroon">保存</button>
             <button type="button" class="btn bg-default" onclick="history.back(-1);">返回</button>
         </div>
         </form>

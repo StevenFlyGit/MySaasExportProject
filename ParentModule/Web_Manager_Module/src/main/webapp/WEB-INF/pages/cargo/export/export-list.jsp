@@ -121,7 +121,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${page.rows}" var="o" varStatus="status">
+                    <c:forEach items="${pageInfo.list}" var="o" varStatus="status">
                         <tr class="odd" onmouseover="this.className='highlight'" onmouseout="this.className='odd'" >
                             <td><input type="checkbox" name="id" value="${o.id}"/></td>
                             <td>${o.id}</td>
@@ -157,7 +157,7 @@
         <!-- .box-footer-->
         <div class="box-footer">
             <jsp:include page="../../common/page.jsp">
-                <jsp:param value="cargo/export/list.do" name="pageUrl"/>
+                <jsp:param value="/cargo/export/list.do" name="pageUrl"/>
             </jsp:include>
         </div>
         <!-- /.box-footer-->

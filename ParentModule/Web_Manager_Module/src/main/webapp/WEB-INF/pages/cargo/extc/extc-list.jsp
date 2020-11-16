@@ -179,7 +179,7 @@
             <!-- .box-footer-->
             <div class="box-footer">
                 <jsp:include page="../../common/page.jsp">
-                    <jsp:param value="cargo/contractProduct/list.do?contractId=${contractId}" name="pageUrl"/>
+                    <jsp:param value="/cargo/extCproduct/list.do?contractId=${contractId}&contractProductId=${contractProductId}" name="pageUrl"/>
                 </jsp:include>
             </div>
             <!-- /.box-footer-->

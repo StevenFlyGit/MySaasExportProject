@@ -55,6 +55,11 @@ public interface ContractService {
     PageInfo<Contract> findByParentDept(String deptId, int pageNum, int pageSize);
 
     /**
+     * 查找某个部门及其子部门的购销合同
+     */
+    PageInfo<Contract> findByParentDeptAndState(String deptId, int pageNum, int pageSize, Integer state);
+
+    /**
      * 根据船期查找数据
      */
     List<ContractProductVo> findTableVoByShipTime(String shipDateString);
