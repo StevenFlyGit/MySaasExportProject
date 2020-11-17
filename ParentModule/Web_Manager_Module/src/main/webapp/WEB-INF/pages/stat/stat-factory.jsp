@@ -17,7 +17,7 @@
     </section>
     <section class="content">
         <div class="box box-primary">
-            <div id="main" style="width: 600px;height:400px;"></div>
+            <div id="main" style="width: 1000px;height:600px;"></div>
         </div>
     </section>
 </div>
@@ -25,31 +25,52 @@
 <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
 <script src="../../plugins/echarts/echarts.min.js"></script>
 <script type="text/javascript">
-    // 基于准备好的dom，初始化echarts实例
-    var myChart = echarts.init(document.getElementById('main'));
+
 
     // 指定图表的配置项和数据
-    $.get('/stat/factoryCharts.do').done(function (data) {
+    $.get('${ctx}/stat/factoryCharts.do').done(function (data) {
+
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        //提取出返回的json数据中的name
+        var names = [];
+        for (var i = 0; i < data.length; i++) {
+            names[i] = data[i].name;
+        }
+
         // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption({
-            title : {
-                text: '厂家销售统计',
-                subtext: '',
-                x:'center'
+        option = {
+            title: {
+                text: '厂家销量统计',
+                subtext: '真实数据',
+                left: 'center'
             },
-            tooltip : {
+            tooltip: {
                 trigger: 'item',
-                formatter: "{a} <br/>{b} : {c} ({d}%)"
+                formatter: '{a} <br/>{b} : {c} ({d}%)'
             },
-            series : [
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+                data: names
+            },
+            series: [
                 {
                     name: '访问来源',
                     type: 'pie',
-                    radius : '55%',
+                    radius: '55%',
                     center: ['50%', '60%'],
-                    data:data,
-                    itemStyle: {
-                        emphasis: {
+                    /*data: [
+                        {value: 335, name: '直接访问'},
+                        {value: 310, name: '邮件营销'},
+                        {value: 234, name: '联盟广告'},
+                        {value: 135, name: '视频广告'},
+                        {value: 1548, name: '搜索引擎'}
+                    ],*/
+                    data: data,
+                    emphasis: {
+                        itemStyle: {
                             shadowBlur: 10,
                             shadowOffsetX: 0,
                             shadowColor: 'rgba(0, 0, 0, 0.5)'
@@ -57,7 +78,10 @@
                     }
                 }
             ]
-        })
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
     });
 </script>
 </html>

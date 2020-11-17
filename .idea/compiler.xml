@@ -10,8 +10,10 @@
         <module name="Cargo_Interface" />
         <module name="Company_Interface" />
         <module name="Company_Portal" />
+        <module name="Statistics_Service" />
         <module name="Service_System_Module" />
         <module name="DomainModule" />
+        <module name="Statistics_Interface" />
         <module name="Company_Service" />
         <module name="Web_Manager_Module" />
         <module name="Cargo_Service" />
@@ -28,6 +30,8 @@
       <module name="DomainModule" target="1.8" />
       <module name="ParentModule" target="1.8" />
       <module name="Service_System_Module" target="1.8" />
+      <module name="Statistics_Interface" target="1.8" />
+      <module name="Statistics_Service" target="1.8" />
       <module name="Web_Manager_Module" target="1.8" />
       <module name="WebModule" target="1.8" />
     </bytecodeTargetLevel>

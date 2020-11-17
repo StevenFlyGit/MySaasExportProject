@@ -151,7 +151,7 @@
                                     <input style="width: 90px" name="exportProducts[${status.index}].exPrice" value="${o.exPrice}">
                                 </td>
                                 <td>
-                                    <input style="width: 90px" name="exportProducts[${status.index}].tax" value="${o.tax}">
+                                    <input style="width: 90px" name="exportProducts[${status.index}].tax" value="${o.tax}" readonly>
                                 </td>
                             </tr>
                         </c:forEach>

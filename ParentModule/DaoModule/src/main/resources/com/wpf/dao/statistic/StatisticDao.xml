@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 映射文件的命名空间必须是所对应接口的路径 -->
+<mapper namespace="com.wpf.dao.statistic.StatisticDao">
+
+
+    <select id="queryFactorySale" resultType="java.util.Map">
+        select union_table.name, sum(union_table.value) value from
+        (select factory_name name, sum(amount) value from co_contract_product
+        where factory_name is not null
+        group by factory_name
+        union all
+        select factory_name name, sum(amount) value from co_ext_cproduct
+        where factory_name is not null
+        group by factory_name) union_table
+        group by union_table.name;
+    </select>
+
+
+    <select id="queryProductTopSale" resultType="java.util.Map">
+        select product_no name , sum(amount) value from co_contract_product group by product_no
+        order by sum(amount) desc
+        limit #{topNum}
+    </select>
+
+
+    <select id="queryOnlinePopulation" resultType="java.util.Map">
+        select h.A1 name, count(*) value from st_online_info h
+        left join st_sys_log l on date_format(l.time,"%H") = h.A1 group by h.A1 order by name
+    </select>
+
+
+</mapper>

@@ -18,6 +18,8 @@
         <module>Company_Portal</module>
         <module>Cargo_Interface</module>
         <module>Cargo_Service</module>
+        <module>Statistics_Interface</module>
+        <module>Statistics_Service</module>
     </modules>
 
     <!-- 集中定义依赖版本号 -->

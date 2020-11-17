@@ -6,6 +6,8 @@ import com.github.pagehelper.PageInfo;
 import com.wpf.dao.cargo.*;
 import com.wpf.domain.cargo.*;
 import com.wpf.service.cargo.ExportService;
+import com.wpf.vo.ExportProductResult;
+import com.wpf.vo.ExportResult;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -152,5 +154,31 @@ public class ExportServiceImpl implements ExportService {
         List<Export> contractList = exportDao.selectByExample(example);
         //封装pageInfo对象并返回
         return new PageInfo<Export>(contractList);
+    }
+
+    @Override
+    public void updateExportFromRemote(ExportResult exportResult) {
+        //通过Id查询原来的Export
+//        Export originExport = exportDao.selectByPrimaryKey(exportResult.getExportId());
+        //直接构造一个新的Export对象并给Id赋值
+        Export originExport = new Export();
+        originExport.setId(exportResult.getExportId());
+        //修改originExport的state和remark属性
+        originExport.setState(exportResult.getState());
+        originExport.setRemark(exportResult.getRemark());
+        exportDao.updateByPrimaryKeySelective(originExport);
+
+        //得到远程返回的货物结果并遍历
+        Set<ExportProductResult> products = exportResult.getProducts();
+        if (products != null && products.size() > 0) {
+            for (ExportProductResult product : products) {
+                //构造新的ExportProduct对象来修改数据库中的数据
+                ExportProduct exportProduct = new ExportProduct();
+                exportProduct.setId(product.getExportProductId());
+                exportProduct.setTax(product.getTax());
+                //修改数据库的数据
+                exportProductDao.updateByPrimaryKeySelective(exportProduct);
+            }
+        }
     }
 }

@@ -1,8 +1,9 @@
 package com.wpf.service.cargo;
 
+import com.github.pagehelper.PageInfo;
 import com.wpf.domain.cargo.Export;
 import com.wpf.domain.cargo.ExportExample;
-import com.github.pagehelper.PageInfo;
+import com.wpf.vo.ExportResult;
 
 
 public interface ExportService {
@@ -16,4 +17,6 @@ public interface ExportService {
     void delete(String id);
 
 	PageInfo<Export> findByPage(ExportExample example, int pageNum, int pageSize);
+
+    void updateExportFromRemote(ExportResult exportResult);
 }

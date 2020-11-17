@@ -11,6 +11,8 @@
       <module fileurl="file://$PROJECT_DIR$/ParentModule/DomainModule/DomainModule.iml" filepath="$PROJECT_DIR$/ParentModule/DomainModule/DomainModule.iml" />
       <module fileurl="file://$PROJECT_DIR$/ParentModule/ParentModule.iml" filepath="$PROJECT_DIR$/ParentModule/ParentModule.iml" />
       <module fileurl="file://$PROJECT_DIR$/ParentModule/Service_System_Module/Service_System_Module.iml" filepath="$PROJECT_DIR$/ParentModule/Service_System_Module/Service_System_Module.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ParentModule/Statistics_Interface/Statistics_Interface.iml" filepath="$PROJECT_DIR$/ParentModule/Statistics_Interface/Statistics_Interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ParentModule/Statistics_Service/Statistics_Service.iml" filepath="$PROJECT_DIR$/ParentModule/Statistics_Service/Statistics_Service.iml" />
       <module fileurl="file://$PROJECT_DIR$/ParentModule/Web_Manager_Module/Web_Manager_Module.iml" filepath="$PROJECT_DIR$/ParentModule/Web_Manager_Module/Web_Manager_Module.iml" />
     </modules>
   </component>
