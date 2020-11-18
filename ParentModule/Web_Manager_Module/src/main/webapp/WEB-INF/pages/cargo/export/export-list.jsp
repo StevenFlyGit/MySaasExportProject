@@ -143,7 +143,7 @@
                                 <a href="${ctx }/cargo/export/toView.do?id=${o.id}">[查看]</a>
                                 <a href="${ctx }/cargo/export/toUpdate.do?id=${o.id}">[编辑]</a>
                                 <c:if test="${o.state==2}">
-                                    <a href="/cargo/export/exportPdf.do?id=${o.id}">[下载]</a>
+                                    <a href="${ctx }/cargo/export/exportPdf.do?id=${o.id}">[下载]</a>
                                 </c:if>
                             </td>
                         </tr>
