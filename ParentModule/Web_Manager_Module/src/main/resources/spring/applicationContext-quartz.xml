@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--将需要定时调度的类加入到IOC容器中-->
+    <bean class="com.wpf.web.task.testTask" id="testTask"/>
+
+    <!--配置定时执行的类和方法-->
+    <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean" id="jobDetail">
+        <property name="targetObject" ref="testTask"/>
+        <property name="targetMethod" value="testEvery5Second"/>
+    </bean>
+
+    <!--配置Trigger触发器-->
+    <bean class="org.springframework.scheduling.quartz.CronTriggerFactoryBean" id="trigger">
+        <!--配置执行频率的时间表达式（7字法则：秒 分 时 日 月 周 年）-->
+        <property name="cronExpression" value="0/5 * * * * ? *"/>
+        <!--配置需要jobDetail，即定时执行的类和方法-->
+        <property name="jobDetail" ref="jobDetail"/>
+    </bean>
+
+    <!--配置定时任务管理器-->
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <!--配置一个触发器-->
+            <list>
+                <ref bean="trigger"/>
+            </list>
+        </property>
+    </bean>
+</beans>
