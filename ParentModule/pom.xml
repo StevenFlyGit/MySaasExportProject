@@ -20,6 +20,7 @@
         <module>Cargo_Service</module>
         <module>Statistics_Interface</module>
         <module>Statistics_Service</module>
+        <module>RabbitMQ_Consumer</module>
     </modules>
 
     <!-- 集中定义依赖版本号 -->
@@ -281,6 +282,13 @@
             <groupId>org.quartz-scheduler</groupId>
             <artifactId>quartz</artifactId>
             <version>2.2.3</version>
+        </dependency>
+
+        <!--RabbitMQ依赖包-->
+        <dependency>
+            <groupId>org.springframework.amqp</groupId>
+            <artifactId>spring-rabbit</artifactId>
+            <version>2.0.1.RELEASE</version>
         </dependency>
 
     </dependencies>

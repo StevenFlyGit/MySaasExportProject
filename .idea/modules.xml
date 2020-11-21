@@ -10,6 +10,7 @@
       <module fileurl="file://$PROJECT_DIR$/ParentModule/DaoModule/DaoModule.iml" filepath="$PROJECT_DIR$/ParentModule/DaoModule/DaoModule.iml" />
       <module fileurl="file://$PROJECT_DIR$/ParentModule/DomainModule/DomainModule.iml" filepath="$PROJECT_DIR$/ParentModule/DomainModule/DomainModule.iml" />
       <module fileurl="file://$PROJECT_DIR$/ParentModule/ParentModule.iml" filepath="$PROJECT_DIR$/ParentModule/ParentModule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ParentModule/RabbitMQ_Consumer/RabbitMQ_Consumer.iml" filepath="$PROJECT_DIR$/ParentModule/RabbitMQ_Consumer/RabbitMQ_Consumer.iml" />
       <module fileurl="file://$PROJECT_DIR$/ParentModule/Service_System_Module/Service_System_Module.iml" filepath="$PROJECT_DIR$/ParentModule/Service_System_Module/Service_System_Module.iml" />
       <module fileurl="file://$PROJECT_DIR$/ParentModule/Statistics_Interface/Statistics_Interface.iml" filepath="$PROJECT_DIR$/ParentModule/Statistics_Interface/Statistics_Interface.iml" />
       <module fileurl="file://$PROJECT_DIR$/ParentModule/Statistics_Service/Statistics_Service.iml" filepath="$PROJECT_DIR$/ParentModule/Statistics_Service/Statistics_Service.iml" />

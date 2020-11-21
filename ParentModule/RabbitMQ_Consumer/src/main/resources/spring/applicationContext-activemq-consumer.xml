@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd">
+
+    <!--配置RabbitMQ链接-->
+    <rabbit:connection-factory
+            id="connectionFactory"
+            host="localhost"
+            port="5672"
+            username="wpf"
+            password="123456"
+            virtual-host="/saasExport"/>
+
+    <!--配置RabbitAdmin-->
+    <rabbit:admin connection-factory="connectionFactory"/>
+
+    <!--配置队列-->
+    <rabbit:queue name="userEmailQueue"/>
+    <!--消费者的配置中可以不配队列，因为生产者已经配置并生成了队列-->
+
+    <!--配置自定义的监听器-->
+    <bean class="com.wpf.listener.EmailMessageListener" id="messageListener"/>
+
+    <rabbit:listener-container connection-factory="connectionFactory">
+        <!--配置监听器和需要监听的队列-->
+        <rabbit:listener ref="messageListener" queue-names="userEmailQueue"/>
+    </rabbit:listener-container>
+
+</beans>

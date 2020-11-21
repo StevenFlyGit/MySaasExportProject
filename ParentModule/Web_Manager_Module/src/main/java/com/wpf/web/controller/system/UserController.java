@@ -1,6 +1,7 @@
 package com.wpf.web.controller.system;
 
 import com.github.pagehelper.PageInfo;
+import com.lowagie.text.pdf.fonts.cmaps.CMap;
 import com.wpf.domain.system.Department;
 import com.wpf.domain.system.Role;
 import com.wpf.domain.system.User;
@@ -10,6 +11,7 @@ import com.wpf.service.system.UserService;
 import com.wpf.web.controller.BaseController;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -92,6 +94,9 @@ public class UserController extends BaseController {
         return "system/user/user-add";
     }
 
+    @Autowired
+    RabbitTemplate rabbitTemplate; //用于发送邮件消息到消息队列中
+
     /**
      * 编辑数据的控制器方法，可执行修改或添加操作
      * @param user 需要添加或修改的user对象
@@ -105,6 +110,20 @@ public class UserController extends BaseController {
         user.setCompanyName(getCompanyName());
         if (StringUtils.isEmpty(user.getId())) {
             userService.addOneUser(user);
+
+            //在此发送邮件的消息到消息服务队列中
+            if (user.getEmail() != null && !"".equals(user.getEmail())) {
+                String email = user.getEmail();
+                //编辑邮件标题和内容
+                String title = "新员工入职通知";
+                String content = "欢迎你来到SaasExport大家庭，我们是一个充满激情的团队，不是996哦！";
+                //将内容存入map集合中
+                Map<String, String> emailMap = new HashMap<>();
+                emailMap.put("email", email);
+                emailMap.put("title", email);
+                emailMap.put("content", content);
+                rabbitTemplate.convertAndSend("email.userEmail", emailMap);
+            }
         } else {
             userService.changeOneUser(user);
         }

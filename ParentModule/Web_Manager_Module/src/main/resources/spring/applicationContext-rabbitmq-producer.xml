@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--配置RabbitMQ链接-->
+    <rabbit:connection-factory
+        id="connectionFactory"
+        host="localhost"
+        port="5672"
+        username="wpf"
+        password="123456"
+        virtual-host="/saasExport"/>
+
+    <!--配置RabbitAdmin-->
+    <rabbit:admin connection-factory="connectionFactory"/>
+
+    <!--配置队列-->
+    <rabbit:queue name="userEmailQueue"/>
+
+    <!--配置交换机，采用通配符模式，并将队列绑定到交换机-->
+    <rabbit:topic-exchange name="userEmailExchange">
+        <rabbit:bindings>
+            <!--.#匹配多级，.*匹配一级(一个.代表一级)-->
+            <rabbit:binding queue="userEmailQueue" pattern="email.#"/>
+        </rabbit:bindings>
+    </rabbit:topic-exchange>
+
+    <!--配置消息的内容对象自动转Json字符串的工具类，方便服务之间的通信-->
+    <bean class="org.springframework.amqp.support.converter.Jackson2JsonMessageConverter" id="jsonMessageConverter"/>
+
+    <!--配置RabbitTemplate，即Rabbit消息队列的模板工具类-->
+    <rabbit:template id="rabbitTemplate"
+                     connection-factory="connectionFactory"
+                     exchange="userEmailExchange"
+                     message-converter="jsonMessageConverter"/>
+
+</beans>
